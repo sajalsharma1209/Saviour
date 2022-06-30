@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".Menu">
+
+    <!-- TODO: Update blank fragment layout -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@drawable/bg"
+        android:weightSum="10"
+        tools:ignore="UselessParent">
+        <RelativeLayout
+            android:layout_weight="2"
+            android:layout_width="match_parent"
+            android:layout_height="0dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/text1"
+                android:text="@string/menu"
+                android:textSize="40sp"
+                android:layout_centerInParent="true"
+                android:textColor="@color/white"/>
+
+        </RelativeLayout>
+        <GridLayout
+            android:columnCount="2"
+            android:rowCount="3"
+            android:alignmentMode="alignMargins"
+            android:columnOrderPreserved="false"
+            android:layout_weight="8"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:padding="14dp">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_rowWeight="1"
+                android:layout_columnWeight="1"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="16dp"
+                app:cardCornerRadius="11dp"
+                app:cardElevation="11dp">
+
+                <LinearLayout
+                    android:layout_gravity="center_horizontal|center_vertical"
+                    android:layout_margin="16dp"
+                    android:orientation="vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:ignore="UseCompoundDrawables">
+
+                    <ImageView
+                        android:src="@drawable/info"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        tools:ignore="ContentDescription" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/instructions"
+                        android:textAlignment="center"
+                        android:textColor="@color/blue"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:gravity="center_horizontal" />
+
+
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_rowWeight="1"
+                android:layout_columnWeight="1"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="16dp"
+                app:cardCornerRadius="11dp"
+                app:cardElevation="11dp">
+
+                <LinearLayout
+                    android:layout_gravity="center_horizontal|center_vertical"
+                    android:layout_margin="16dp"
+                    android:orientation="vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:ignore="UseCompoundDrawables">
+
+                    <ImageView
+                        android:src="@drawable/add"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        tools:ignore="ContentDescription">
+
+                    </ImageView>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/register_number"
+                        android:textAlignment="center"
+                        android:textColor="@color/blue"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:gravity="center_horizontal"
+                        >
+
+                    </TextView>
+
+
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_rowWeight="1"
+                android:layout_columnWeight="1"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="16dp"
+                app:cardCornerRadius="11dp"
+                app:cardElevation="11dp">
+
+                <LinearLayout
+                    android:layout_gravity="center_horizontal|center_vertical"
+                    android:layout_margin="16dp"
+                    android:orientation="vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:ignore="UseCompoundDrawables">
+
+                    <ImageView
+                        android:src="@drawable/edit"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        tools:ignore="ContentDescription" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/edit_sos_message"
+                        android:textAlignment="center"
+                        android:textColor="@color/blue"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:gravity="center_horizontal" />
+
+
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_rowWeight="1"
+                android:layout_columnWeight="1"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="16dp"
+                app:cardCornerRadius="11dp"
+                app:cardElevation="11dp">
+
+                <LinearLayout
+                    android:layout_gravity="center_horizontal|center_vertical"
+                    android:layout_margin="16dp"
+                    android:orientation="vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:ignore="UseCompoundDrawables">
+
+                    <ImageView
+                        android:src="@drawable/verify"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        tools:ignore="ContentDescription">
+
+                    </ImageView>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/view_register_numbers"
+                        android:textAlignment="center"
+                        android:textColor="@color/blue"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:gravity="center_horizontal" >
+
+                    </TextView>
+
+
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_rowWeight="1"
+                android:layout_columnWeight="1"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="16dp"
+                app:cardCornerRadius="11dp"
+                app:cardElevation="11dp">
+
+                <LinearLayout
+                    android:layout_gravity="center_horizontal|center_vertical"
+                    android:layout_margin="16dp"
+                    android:orientation="vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:ignore="UseCompoundDrawables">
+
+                    <ImageView
+                        android:src="@drawable/trash"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        tools:ignore="ContentDescription" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/delete_number"
+                        android:textAlignment="center"
+                        android:textColor="@color/blue"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:gravity="center_horizontal" />
+
+
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_rowWeight="1"
+                android:layout_columnWeight="1"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="16dp"
+                app:cardCornerRadius="11dp"
+                app:cardElevation="11dp">
+
+                <LinearLayout
+                    android:layout_gravity="center_horizontal|center_vertical"
+                    android:layout_margin="16dp"
+                    android:orientation="vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:ignore="UseCompoundDrawables">
+
+                    <ImageView
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_gravity="center_horizontal"
+                        android:src="@drawable/rate"
+                        tools:ignore="ContentDescription,ImageContrastCheck">
+
+                    </ImageView>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/rate_us"
+                        android:textAlignment="center"
+                        android:layout_gravity="center_horizontal"
+                        android:textColor="@color/blue"
+                        android:textSize="18sp"
+                        android:textStyle="bold">
+
+                    </TextView>
+
+
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+
+        </GridLayout>
+
+    </LinearLayout>
+
+</FrameLayout>
