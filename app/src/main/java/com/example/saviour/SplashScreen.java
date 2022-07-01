@@ -12,6 +12,8 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.saviour.Main_Activity.MainActivity;
+
 @SuppressLint("CustomSplashScreen")
 public class SplashScreen extends AppCompatActivity {
     ImageView imageView;
@@ -38,7 +40,7 @@ public class SplashScreen extends AppCompatActivity {
 
         new Handler().postDelayed(() -> {
 
-            startActivity(new Intent(SplashScreen.this, com.example.saviour.MainActivity.class));
+            startActivity(new Intent(SplashScreen.this, MainActivity.class));
             finish();
         },3000);
     }
