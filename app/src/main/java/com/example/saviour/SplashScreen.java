@@ -38,10 +38,10 @@ public class SplashScreen extends AppCompatActivity {
         title.setAnimation(middle);
         bottomtitle.setAnimation(bottom);
 
-        new Handler().postDelayed(() -> {
-
-            startActivity(new Intent(SplashScreen.this, MainActivity.class));
-            finish();
-        },3000);
+//        new Handler().postDelayed(() -> {
+//
+//            startActivity(new Intent(SplashScreen.this, MainActivity.class));
+//            finish();
+//        },3000);
     }
 }
