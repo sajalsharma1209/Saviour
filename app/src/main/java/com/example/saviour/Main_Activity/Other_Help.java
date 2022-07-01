@@ -8,6 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.saviour.R;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link Other_Help#newInstance} factory method to
