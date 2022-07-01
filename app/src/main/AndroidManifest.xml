@@ -9,7 +9,7 @@
         android:roundIcon="@drawable/ic_launcher_foreground"
         android:supportsRtl="true"
         android:theme="@style/Theme.Saviour">
-        <activity android:name=".MainActivity"
+        <activity android:name=".Main_Activity.MainActivity"
             android:exported="true"/>
         <activity
             android:name=".SplashScreen"
