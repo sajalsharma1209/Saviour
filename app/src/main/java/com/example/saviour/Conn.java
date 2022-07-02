@@ -1,7 +1,9 @@
 package com.example.saviour;
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -38,5 +40,13 @@ public class Conn extends SQLiteOpenHelper {
         long r=db.insert("members",null,c);
 
         return r!=-1;
+    }
+
+    public String get_row() {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        @SuppressLint("Recycle") Cursor number=db.rawQuery("SELECT * FROM members;",null);
+
+        return String.valueOf(number.getCount());
     }
 }
