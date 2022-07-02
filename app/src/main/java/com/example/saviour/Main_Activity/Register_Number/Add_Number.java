@@ -1,17 +1,14 @@
 package com.example.saviour.Main_Activity.Register_Number;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.saviour.Conn;
 import com.example.saviour.R;
-
-import java.util.Objects;
 
 public class Add_Number extends AppCompatActivity {
 
