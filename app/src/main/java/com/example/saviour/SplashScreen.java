@@ -14,6 +14,8 @@ import android.widget.TextView;
 
 import com.example.saviour.Main_Activity.MainActivity;
 
+import java.util.Objects;
+
 @SuppressLint("CustomSplashScreen")
 public class SplashScreen extends AppCompatActivity {
     ImageView imageView;
@@ -25,6 +27,7 @@ public class SplashScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.splash_screen);
+        Objects.requireNonNull(getSupportActionBar()).hide();
 
         imageView=findViewById(R.id.logo);
         title=findViewById(R.id.title);
@@ -38,10 +41,10 @@ public class SplashScreen extends AppCompatActivity {
         title.setAnimation(middle);
         bottomtitle.setAnimation(bottom);
 
-//        new Handler().postDelayed(() -> {
-//
-//            startActivity(new Intent(SplashScreen.this, MainActivity.class));
-//            finish();
-//        },3000);
+        new Handler().postDelayed(() -> {
+
+            startActivity(new Intent(SplashScreen.this, MainActivity.class));
+            finish();
+        },3000);
     }
 }

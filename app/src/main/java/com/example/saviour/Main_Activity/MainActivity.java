@@ -5,10 +5,11 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
-
 import com.example.saviour.R;
 import com.google.android.material.tabs.TabItem;
 import com.google.android.material.tabs.TabLayout;
+
+import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -21,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Objects.requireNonNull(getSupportActionBar()).hide();
 
         tablayout= findViewById(R.id.tablayout1);
         tabitem1= findViewById(R.id.tabitem1);
@@ -31,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
         pageadapter = new PageAdapter(getSupportFragmentManager(),tablayout.getTabCount());
         viewpager1.setAdapter(pageadapter);
 
-        tablayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+        tablayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
              viewpager1.setCurrentItem(tab.getPosition());

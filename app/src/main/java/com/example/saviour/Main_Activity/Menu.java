@@ -1,13 +1,17 @@
 package com.example.saviour.Main_Activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.saviour.Main_Activity.Menu_Instruction.instructions;
+import com.example.saviour.Main_Activity.Register_Number.Add_Number;
 import com.example.saviour.R;
 
 /**
@@ -60,7 +64,20 @@ public class Menu extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        CardView card1,card2;
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_menu, container, false);
+        View v = inflater.inflate(R.layout.fragment_menu, container, false);
+        card1 = v.findViewById(R.id.instruction);
+        card2=v.findViewById(R.id.add_member);
+        card1.setOnClickListener(v12 -> {
+            Intent intent = new Intent(getActivity(), instructions.class);
+            startActivity(intent);
+        });
+
+        card2.setOnClickListener(v1 -> {
+            Intent intent = new Intent(getActivity(), Add_Number.class);
+            startActivity(intent);
+        });
+        return v;
     }
 }

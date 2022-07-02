@@ -1,14 +1,26 @@
 package com.example.saviour.Main_Activity;
 
+import android.Manifest;
+import android.annotation.SuppressLint;
+import android.content.DialogInterface;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
+import android.telephony.SmsManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.Toast;
+
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AlertDialog;
+import androidx.core.app.ActivityCompat;
+import androidx.fragment.app.Fragment;
 
 import com.example.saviour.R;
+
+import java.util.Objects;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -57,10 +69,70 @@ public class Home extends Fragment {
         }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    @SuppressLint("UseRequireInsteadOfGet")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        ImageView clicksasbutton;
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false);
+        View v = inflater.inflate(R.layout.fragment_home, container, false);
+
+        clicksasbutton = v.findViewById(R.id.sosclickbutton);
+        clicksasbutton.setOnClickListener(view -> {
+            if (ActivityCompat.checkSelfPermission(Objects.requireNonNull(getContext()), Manifest.permission.SEND_SMS) == PackageManager.PERMISSION_GRANTED) {
+                if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.READ_PHONE_STATE) == PackageManager.PERMISSION_GRANTED) {
+                    if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.READ_PHONE_NUMBERS) == PackageManager.PERMISSION_GRANTED) {
+                        send_sms();
+                        Toast.makeText(getContext(), "Sms sent successfully", Toast.LENGTH_SHORT).show();
+                    } else {
+
+                        ActivityCompat.requestPermissions(Objects.requireNonNull(getActivity()), new String[]{Manifest.permission.READ_PHONE_NUMBERS}, 0);
+
+                    }
+                } else {
+                    ActivityCompat.requestPermissions(Objects.requireNonNull(getActivity()), new String[]{Manifest.permission.READ_PHONE_STATE}, 0);
+                }
+            } else {
+                ActivityCompat.requestPermissions(Objects.requireNonNull(getActivity()), new String[]{Manifest.permission.SEND_SMS}, 1);
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                builder.setMessage("Permission Needed");
+                builder.setTitle("Permission Needed");
+
+                builder.setCancelable(false);
+
+//                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialogInterface, int i) {
+//
+//                    }
+//                });
+                builder.setNeutralButton("OK", (dialogInterface, i) -> {
+
+                });
+//
+                AlertDialog alertDialog = builder.create();
+
+                // Show the Alert Dialog box
+                alertDialog.show();
+//
+            }
+
+        });
+
+
+        return v;
+    }
+
+    private void send_sms() {
+
+
+        SmsManager smsManager = SmsManager.getDefault();
+        
+            smsManager.sendTextMessage("+91-8307129903", "8307129903", "hello world", null, null);
+
+
+
     }
 }

@@ -13,4 +13,18 @@
     <string name="view_register_numbers">View Register Numbers</string>
     <string name="edit_sos_message">Edit SOS Message</string>
     <string name="other_help">Other_Help</string>
+    <string name="register_your_emergency_contact_numbers_under_menu_register_number"><![CDATA[Register your Emergency Contact Numbers Under MENU->REGISTER NUMBER]]></string>
+    <string name="_1"><![CDATA[1:->]]></string>
+    <string name="_2"><![CDATA[2:->]]></string>
+    <string name="press_the_sos_button_on_the_homepage_in_case_of_emergency_on_pressing_the_button_an_sos_message_along_with_the_linkof_your_current_location_will_be_sent_as_an_sms_to_the_all_registered_numbers">Press the SOS Button on the homepage in case of Emergency.On pressing the button,an SOS message along with the link of your CURRENT LOCATION will be sent as an SMS to the all registered numbers.</string>
+    <string name="_3"><![CDATA[3:->]]></string>
+    <string name="we_recommend_you_to_always_keep_your_gps_turned_on_so_that_your_device_has_enough_information_about_your_location_in_case_of_an_emergency">We recommend you to always keep your GPS turned ON so that your device has enough information about your location in case of an Emergency.</string>
+    <string name="_4"><![CDATA[4:->]]></string>
+    <string name="we_recommend_you_to_use_sos_alert_widget_and_always_keep_gps_turned_on_so_that_you_cand_send_sos_alert_in_just_one_tap">We recommend you to use SOS Alert Widget and always keep GPS turned ON so that you cand send SOS Alert in just one tap.</string>
+    <string name="you_can_register_upto_10_contact_numbers">(You can Register up to 10 Contact Numbers)</string>
+    <string name="enter_member_name">Enter Member Name</string>
+    <string name="enter_number">Enter Number</string>
+    <string name="submit">Submit</string>
+    <string name="member_name">Member Name</string>
+    <string name="mobile">Mobile</string>
 </resources>
