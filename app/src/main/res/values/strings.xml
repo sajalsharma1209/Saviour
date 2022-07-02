@@ -7,10 +7,10 @@
     <string name="other_helps">Other Helps</string>
     <string name="menu">Menu</string>
     <string name="instructions">Instructions</string>
-    <string name="register_number">Register Number</string>
+    <string name="register_number">Add Members</string>
     <string name="rate_us">Rate us</string>
-    <string name="delete_number">Delete Number</string>
-    <string name="view_register_numbers">View Register Numbers</string>
+    <string name="delete_number">Delete Members</string>
+    <string name="view_register_numbers">View Members</string>
     <string name="edit_sos_message">Edit SOS Message</string>
     <string name="other_help">Other_Help</string>
     <string name="register_your_emergency_contact_numbers_under_menu_register_number"><![CDATA[Register your Emergency Contact Numbers Under MENU->REGISTER NUMBER]]></string>
