@@ -35,7 +35,7 @@ public class Add_Number extends AppCompatActivity {
 
         no_count.setText(count + " numbers added");
 
-        if (Integer.parseInt(count) + 1 > 10 && Integer.parseInt(count) + 1 >= 11) {
+        if ( Integer.parseInt(count) >=10) {
             name.setEnabled(false);
             mobile.setEnabled(false);
             submit.setEnabled(false);
@@ -45,9 +45,8 @@ public class Add_Number extends AppCompatActivity {
 
             String mem_name = name.getText().toString().trim().toUpperCase();
             String mem_mobile = mobile.getText().toString().trim();
-            String count1 = conn.get_row();
-            if(Integer.parseInt(count)+1 <= 10 && Integer.parseInt(count)+1 < 11)
-            {
+
+
                 if (mem_name.isEmpty() && mem_mobile.isEmpty()) {
                     name.setError("Field Required");
                     mobile.setError("Field Required");
@@ -62,17 +61,16 @@ public class Add_Number extends AppCompatActivity {
                         name.setText("");
                         mobile.setText("");
 
-                        no_count.setText(Integer.parseInt( count1)+1+ " numbers added");
+                        no_count.setText(Integer.parseInt(conn.get_row())+ " numbers added");
+
+                        if ( Integer.parseInt(conn.get_row()) >=10) {
+                            name.setEnabled(false);
+                            mobile.setEnabled(false);
+                            submit.setEnabled(false);
+                        }
                     }
                 }
-            }
-            else
-            {
-                name.setEnabled(false);
-                mobile.setEnabled(false);
-                submit.setEnabled(false);
 
-            }
 
         });
 
