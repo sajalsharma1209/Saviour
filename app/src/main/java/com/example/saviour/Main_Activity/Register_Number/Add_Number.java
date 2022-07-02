@@ -72,10 +72,7 @@ public class Add_Number extends AppCompatActivity {
                 mobile.setEnabled(false);
                 submit.setEnabled(false);
 
-
             }
-
-
 
         });
 
