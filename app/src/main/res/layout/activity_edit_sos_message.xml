@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg"
+    android:orientation="vertical"
+    tools:context=".Main_Activity.Menu_Edit_Sos_Message.Edit_Sos_Message">
+
+
+    <ImageView
+        android:id="@+id/edit123"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:layout_marginStart="130dp"
+        android:layout_marginTop="50dp"
+        android:src="@drawable/sos_message_pencil"
+        tools:ignore="ContentDescription">
+
+    </ImageView>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/textedit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="90dp"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/sos_message1"
+                android:textAlignment="center"
+                android:textColor="@color/blue"
+                android:textSize="35sp"
+                android:textStyle="bold">
+
+            </TextView>
+
+            <TextView
+                android:id="@+id/textedit2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:ems="20"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/this_message_along_with_your_current_location_will_be_sent_to_the_registered_numbers_when_you_press_the_sos_button"
+                android:textAlignment="center"
+                android:textColor="@color/red">
+
+            </TextView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="20dp"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/if_you_want_to_change_the_sos_message_type_below"
+                android:textAlignment="center"
+                android:textColor="@color/green">
+
+            </TextView>
+
+            <EditText
+                android:id="@+id/msgtxt"
+                android:layout_width="wrap_content"
+                android:layout_height="150dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:background="@color/white"
+                android:ems="15"
+                android:gravity="start|top"
+                android:hint="@string/sos_message"
+                android:inputType="textMultiLine"
+                android:textAlignment="center"
+                android:textColorHint="#750E88EA"
+                tools:ignore="Autofill,RtlCompat" />
+
+            <Button
+                android:id="@+id/savebutton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="50dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="50dp"
+                android:background="@color/blue"
+                android:text="@string/save"
+                android:textColor="@color/white"
+                android:textSize="25sp"/>
+        </LinearLayout>
+
+    </ScrollView>
+
+
+</androidx.appcompat.widget.LinearLayoutCompat>

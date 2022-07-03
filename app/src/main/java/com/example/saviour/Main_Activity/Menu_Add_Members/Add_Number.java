@@ -1,4 +1,4 @@
-package com.example.saviour.Main_Activity.Register_Number;
+package com.example.saviour.Main_Activity.Menu_Add_Members;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
@@ -31,7 +31,7 @@ public class Add_Number extends AppCompatActivity {
         submit = findViewById(R.id.submit);
         no_count = findViewById(R.id.txtnumbercount);
 
-        String count = conn.get_row();
+        String count =""+ conn.get_members().getCount();
 
         no_count.setText(count + " numbers added");
 
@@ -57,13 +57,13 @@ public class Add_Number extends AppCompatActivity {
                 } else {
                     boolean check = conn.insert_members(mem_name, "+91-" + mem_mobile);
                     if (check) {
-                        Toast.makeText(this, "Successfully Registered", Toast.LENGTH_LONG).show();
+                        Toast.makeText(this, "Successfully Registered", Toast.LENGTH_SHORT).show();
                         name.setText("");
                         mobile.setText("");
 
-                        no_count.setText(Integer.parseInt(conn.get_row())+ " numbers added");
+                        no_count.setText(Integer.parseInt(""+conn.get_members().getCount())+ " numbers added");
 
-                        if ( Integer.parseInt(conn.get_row()) >=10) {
+                        if ( Integer.parseInt(""+conn.get_members().getCount()) >=10) {
                             name.setEnabled(false);
                             mobile.setEnabled(false);
                             submit.setEnabled(false);

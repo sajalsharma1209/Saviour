@@ -5,7 +5,7 @@
     android:background="@drawable/bg"
     android:orientation="vertical"
     android:layout_height="match_parent"
-    tools:context=".Main_Activity.Register_Number.Add_Number"
+    tools:context=".Main_Activity.Menu_Add_Members.Add_Number"
     >
 
     <ImageView

@@ -42,7 +42,7 @@
            android:layout_marginLeft="16dp"
            android:layout_marginRight="16dp"
            android:layout_marginBottom="16dp"
-           app:cardCornerRadius="100dp"
+           app:cardCornerRadius="150dp"
            app:cardElevation="11dp">
 
            <LinearLayout

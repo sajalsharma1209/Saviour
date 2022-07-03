@@ -14,28 +14,33 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Saviour">
         <activity
-            android:name=".Main_Activity.Register_Number.Add_Number"
-            android:exported="true">
+            android:name=".Main_Activity.Menu_Rate_Us.Rate_Us"
+            android:exported="true" >
 
         </activity>
+        <activity
+            android:name=".Main_Activity.Menu_View_Members.View_Members"
+            android:exported="false" />
+        <activity
+            android:name=".Main_Activity.Menu_Edit_Sos_Message.Edit_Sos_Message"
+            android:exported="false" />
+        <activity
+            android:name=".Main_Activity.Menu_Add_Members.Add_Number"
+            android:exported="true" />
         <activity
             android:name=".Main_Activity.MainActivity"
             android:exported="true" />
         <activity
             android:name=".Main_Activity.Menu_Instruction.instructions"
-            android:exported="true">
-
-        </activity>
+            android:exported="true" />
         <activity
             android:name=".SplashScreen"
             android:exported="true">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
     </application>
 

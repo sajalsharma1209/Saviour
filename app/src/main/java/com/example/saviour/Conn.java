@@ -10,9 +10,10 @@ import android.database.sqlite.SQLiteOpenHelper;
 import androidx.annotation.Nullable;
 
 public class Conn extends SQLiteOpenHelper {
-    private  static final String databasename="database.db";
+    private static final String databasename = "database.db";
+
     public Conn(@Nullable Context context) {
-        super(context,databasename,null, 1);
+        super(context, databasename, null, 1);
     }
 
     @Override
@@ -23,6 +24,15 @@ public class Conn extends SQLiteOpenHelper {
                 "    name      STRING  NOT NULL,\n" +
                 "    mobile        STRING  NOT NULL);");
 
+        sqLiteDatabase.execSQL("CREATE TABLE sosmessage (\n" +
+                "    id      INTEGER PRIMARY KEY ASC AUTOINCREMENT\n" +
+                "                    NOT NULL,\n" +
+                "    message STRING NOT NULL\n" +
+                ");\n");
+
+        sqLiteDatabase.execSQL("insert into sosmessage values(null,\"HELP Me! IT'S AN EMERGANCY\");");
+
+
     }
 
     @Override
@@ -30,23 +40,41 @@ public class Conn extends SQLiteOpenHelper {
 
     }
 
-    public boolean insert_members(String name,String mobile)
-    {
-        SQLiteDatabase db=this.getWritableDatabase();
-        ContentValues c=new ContentValues();
-        c.put("name",name);
-        c.put("mobile",mobile);
+    public boolean insert_members(String name, String mobile) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues c = new ContentValues();
+        c.put("name", name);
+        c.put("mobile", mobile);
 
-        long r=db.insert("members",null,c);
+        long r = db.insert("members", null, c);
 
-        return r!=-1;
+        return r != -1;
     }
 
-    public String get_row() {
+    public Cursor get_members() {
         SQLiteDatabase db = this.getWritableDatabase();
 
-        @SuppressLint("Recycle") Cursor number=db.rawQuery("SELECT * FROM members;",null);
+        @SuppressLint("Recycle") Cursor number = db.rawQuery("SELECT * FROM members;", null);
 
-        return String.valueOf(number.getCount());
+        //return String.valueOf(number.getCount());
+        return number;
     }
+
+
+    public Cursor message_get_value() {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        return db.rawQuery("select * from sosmessage",null);
+        }
+
+    public boolean uupdate_message(String message)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        db.execSQL("update sosmessage set message='"+message+"' where id=1;");
+
+        return true;
+    }
+
+
 }

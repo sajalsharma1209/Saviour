@@ -27,4 +27,12 @@
     <string name="submit">Submit</string>
     <string name="member_name">Member Name</string>
     <string name="mobile">Mobile</string>
+    <string name="sos_message">HELP Me!! IT\'S AN EMERGANCY</string>
+    <string name="sos_message1">Sos Message</string>
+    <string name="this_message_along_with_your_current_location_will_be_sent_to_the_registered_numbers_when_you_press_the_sos_button">(This is message along with your current location will be sent to the registered numbers when you press the SOS Button)..</string>
+    <string name="save">Save</string>
+    <string name="if_you_want_to_change_the_sos_message_type_below"><b><u>This is SOS message.</u></b>\nIf you want to change the sos message\nType below</string>
+    <string name="_0">0</string>
+    <string name="sajal_sharma_anoop_kumar">Sajal Sharma Anoop Kumar</string>
+    <string name="_8307129903">8307129903</string>
 </resources>
