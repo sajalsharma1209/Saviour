@@ -2,17 +2,17 @@ package com.example.saviour.Main_Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.cardview.widget.CardView;
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.cardview.widget.CardView;
+import androidx.fragment.app.Fragment;
+
+import com.example.saviour.Main_Activity.Menu_Add_Members.Add_Number;
 import com.example.saviour.Main_Activity.Menu_Edit_Sos_Message.Edit_Sos_Message;
 import com.example.saviour.Main_Activity.Menu_Instruction.instructions;
-import com.example.saviour.Main_Activity.Menu_Add_Members.Add_Number;
+import com.example.saviour.Main_Activity.Menu_Rate_Us.Rate_Us;
 import com.example.saviour.Main_Activity.Menu_View_Members.View_Members;
 import com.example.saviour.R;
 
@@ -66,13 +66,14 @@ public class Menu extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        CardView card1,card2,card3,card4;
+        CardView card1, card2, card3, card4, card5;
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_menu, container, false);
         card1 = v.findViewById(R.id.instruction);
-        card2=v.findViewById(R.id.add_member);
-        card3=v.findViewById(R.id.editmessage);
-        card4=v.findViewById(R.id.view_members);
+        card2 = v.findViewById(R.id.add_member);
+        card3 = v.findViewById(R.id.editmessage);
+        card4 = v.findViewById(R.id.view_members);
+        card5 = v.findViewById(R.id.rating);
         card1.setOnClickListener(v1 -> {
             Intent intent = new Intent(Menu.this.getActivity(), instructions.class);
             Menu.this.startActivity(intent);
@@ -83,15 +84,19 @@ public class Menu extends Fragment {
             startActivity(intent);
         });
         card3.setOnClickListener(v3 ->
-    {
-
-        Intent intent = new Intent(Menu.this.getActivity(), Edit_Sos_Message.class);
-        Menu.this.startActivity(intent);
+        {
+            Intent intent = new Intent(Menu.this.getActivity(), Edit_Sos_Message.class);
+            Menu.this.startActivity(intent);
         });
-        card4.setOnClickListener(v4 ->{
+        card4.setOnClickListener(v4 -> {
             Intent intent = new Intent(Menu.this.getActivity(), View_Members.class);
             Menu.this.startActivity(intent);
         });
+        card5.setOnClickListener(c6 -> {
+            Intent intent = new Intent(Menu.this.getActivity(), Rate_Us.class);
+            Menu.this.startActivity(intent);
+        });
+
         return v;
     }
 }

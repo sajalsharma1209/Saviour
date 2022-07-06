@@ -32,6 +32,12 @@ public class Conn extends SQLiteOpenHelper {
 
         sqLiteDatabase.execSQL("insert into sosmessage values(null,\"HELP Me! IT'S AN EMERGANCY\");");
 
+        sqLiteDatabase.execSQL("CREATE TABLE user (\n" +
+                "    id          INTEGER PRIMARY KEY ASC AUTOINCREMENT\n" +
+                "                        NOT NULL,\n" +
+                "    name      STRING  NOT NULL,\n" +
+                "    mobile        STRING  NOT NULL);");
+
 
     }
 
@@ -64,14 +70,13 @@ public class Conn extends SQLiteOpenHelper {
     public Cursor message_get_value() {
         SQLiteDatabase db = this.getWritableDatabase();
 
-        return db.rawQuery("select * from sosmessage",null);
-        }
+        return db.rawQuery("select * from sosmessage", null);
+    }
 
-    public boolean uupdate_message(String message)
-    {
+    public boolean uupdate_message(String message) {
         SQLiteDatabase db = this.getWritableDatabase();
 
-        db.execSQL("update sosmessage set message='"+message+"' where id=1;");
+        db.execSQL("update sosmessage set message='" + message + "' where id=1;");
 
         return true;
     }

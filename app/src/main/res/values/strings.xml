@@ -35,4 +35,10 @@
     <string name="_0">0</string>
     <string name="sajal_sharma_anoop_kumar">Sajal Sharma Anoop Kumar</string>
     <string name="_8307129903">8307129903</string>
+    <string name="your_name">Your name</string>
+    <string name="your_mobile_number">Your mobile number</string>
+    <string name="your_mobile_number_shoule_be_there_in_this_mobile">Note:—> <u>Your mobile number should be present in this mobile.</u></string>
+    <string name="go">Go</string>
+
+    <string name="emergency_help">Emergency Help</string>
 </resources>

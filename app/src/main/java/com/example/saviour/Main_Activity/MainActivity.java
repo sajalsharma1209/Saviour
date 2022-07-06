@@ -1,22 +1,27 @@
 package com.example.saviour.Main_Activity;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.view.MenuItem;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.viewpager.widget.ViewPager;
+import androidx.fragment.app.Fragment;
 
 import com.example.saviour.R;
-import com.google.android.material.tabs.TabItem;
-import com.google.android.material.tabs.TabLayout;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 
 import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
 
-    TabLayout tablayout;
-    TabItem tabitem1,tabitem2,tabitem3;
-    ViewPager viewpager1;
-    PageAdapter pageadapter;
+
+    BottomNavigationView bottomnav;
+
+    Home home = new Home();
+    Menu menu = new Menu();
+    Other_Help help = new Other_Help();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,37 +29,29 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Objects.requireNonNull(getSupportActionBar()).hide();
 
-        tablayout= findViewById(R.id.tablayout1);
-        tabitem1= findViewById(R.id.tabitem1);
-        tabitem2= findViewById(R.id.tabitem2);
-        tabitem3= findViewById(R.id.tabitem3);
-        viewpager1= findViewById(R.id.viewpager1);
 
-        pageadapter = new PageAdapter(getSupportFragmentManager(),tablayout.getTabCount());
-        viewpager1.setAdapter(pageadapter);
+        bottomnav = findViewById(R.id.bottom_nav);
 
-        tablayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-             viewpager1.setCurrentItem(tab.getPosition());
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, home).commit();
 
-             if(tab.getPosition()==0||tab.getPosition()==1||tab.getPosition()==2)
-             {
-                 pageadapter.notifyDataSetChanged();
-             }
-            }
+        bottomnav.setOnItemSelectedListener(item -> {
+            switch (item.getItemId()) {
+                case R.id.home:
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, home).commit();
+                    return true;
 
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
+                case R.id.menu:
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, menu).commit();
+                    return true;
+
+                case R.id.help:
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, help).commit();
+                    return true;
 
             }
-
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-
-            }
+            return true;
         });
 
-        viewpager1.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tablayout));
+
     }
 }

@@ -2,26 +2,24 @@ package com.example.saviour.Main_Activity;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
-import android.content.DialogInterface;
+import android.app.DownloadManager;
+import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.telephony.SmsManager;
+import android.telephony.TelephonyManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AlertDialog;
 import androidx.cardview.widget.CardView;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 
 import com.example.saviour.R;
-
-import java.util.Objects;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -70,8 +68,7 @@ public class Home extends Fragment {
         }
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
-    @SuppressLint("UseRequireInsteadOfGet")
+    @SuppressLint("RestrictedApi")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -81,48 +78,17 @@ public class Home extends Fragment {
 
         clicksasbutton = v.findViewById(R.id.sosclickbutton);
         clicksasbutton.setOnClickListener(view -> {
-            if (ActivityCompat.checkSelfPermission(Objects.requireNonNull(getContext()), Manifest.permission.SEND_SMS) == PackageManager.PERMISSION_GRANTED) {
-                if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.READ_PHONE_STATE) == PackageManager.PERMISSION_GRANTED) {
-                    if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.READ_PHONE_NUMBERS) == PackageManager.PERMISSION_GRANTED) {
-                       // send_sms();
-                        Toast.makeText(getContext(), "Sms sent successfully", Toast.LENGTH_SHORT).show();
-                    } else {
-
-                        ActivityCompat.requestPermissions(Objects.requireNonNull(getActivity()), new String[]{Manifest.permission.READ_PHONE_NUMBERS}, 0);
-
-                    }
-                } else {
-                    ActivityCompat.requestPermissions(Objects.requireNonNull(getActivity()), new String[]{Manifest.permission.READ_PHONE_STATE}, 0);
-                }
+            if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.SEND_SMS) == PackageManager.PERMISSION_GRANTED) {
+                send_sms();
+                Toast.makeText(getContext(), "Submit", Toast.LENGTH_SHORT).show();
             } else {
-                ActivityCompat.requestPermissions(Objects.requireNonNull(getActivity()), new String[]{Manifest.permission.SEND_SMS}, 1);
+                ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.SEND_SMS},0);
 
-                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-                builder.setMessage("Permission Needed");
-                builder.setTitle("Permission Needed");
-
-                builder.setCancelable(false);
-
-//                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialogInterface, int i) {
-//
-//                    }
-//                });
-                builder.setNeutralButton("OK", (dialogInterface, i) -> {
-
-                });
-//
-                AlertDialog alertDialog = builder.create();
-
-                // Show the Alert Dialog box
-                alertDialog.show();
-//
-            }
-
+                //ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.READ_PHONE_STATE}, 0);
+                           }
         });
 
-
+       // if(ActivityCompat.shouldShowRequestPermissionRationale(getActivity(),new String[]{M)){}
         return v;
     }
 
@@ -130,9 +96,7 @@ public class Home extends Fragment {
 
 
         SmsManager smsManager = SmsManager.getDefault();
-        
-            smsManager.sendTextMessage("+91-8307129903", "8307129903", "hello world", null, null);
-
+           smsManager.sendTextMessage("+91-8307129903", null, "http://maps.google.com/", null, null);
 
 
     }
