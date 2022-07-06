@@ -26,7 +26,7 @@ public class Edit_Sos_Message extends AppCompatActivity {
 
         message = findViewById(R.id.msgtxt);
         savebtn = findViewById(R.id.savebutton);
-        Cursor cursor = conn.message_get_value();
+        Cursor cursor = conn.get_message();
         if (cursor.moveToFirst()) {
 
             message.setHint(cursor.getString(1));
@@ -37,10 +37,10 @@ public class Edit_Sos_Message extends AppCompatActivity {
 
             String sosmessage = message.getText().toString().trim();
 
-            boolean check = conn.uupdate_message(sosmessage);
+            boolean check = conn.update_message(sosmessage);
             if (check) {
                 Toast.makeText(this, "Now, sos will sent this update message to your family members", Toast.LENGTH_SHORT).show();
-                Cursor cursor1 = conn.message_get_value();
+                Cursor cursor1 = conn.get_message();
                 if (cursor1.moveToFirst()) {
                     message.setText("");
                     message.setHint(cursor1.getString(1));

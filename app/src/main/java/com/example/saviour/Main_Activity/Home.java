@@ -2,24 +2,27 @@ package com.example.saviour.Main_Activity;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
-import android.app.DownloadManager;
-import android.content.Context;
 import android.content.pm.PackageManager;
-import android.os.Build;
+import android.database.Cursor;
+import android.location.Location;
 import android.os.Bundle;
 import android.telephony.SmsManager;
-import android.telephony.TelephonyManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import androidx.annotation.RequiresApi;
 import androidx.cardview.widget.CardView;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 
+import com.example.saviour.Conn;
 import com.example.saviour.R;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.tasks.OnSuccessListener;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -27,6 +30,9 @@ import com.example.saviour.R;
  * create an instance of this fragment.
  */
 public class Home extends Fragment {
+
+    FusedLocationProviderClient fusedLocationProviderClient;
+
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -72,32 +78,78 @@ public class Home extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+
         CardView clicksasbutton;
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_home, container, false);
+        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(v.getContext());
 
         clicksasbutton = v.findViewById(R.id.sosclickbutton);
         clicksasbutton.setOnClickListener(view -> {
-            if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.SEND_SMS) == PackageManager.PERMISSION_GRANTED) {
+            if (ActivityCompat.checkSelfPermission(v.getContext(), Manifest.permission.SEND_SMS) == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(v.getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(v.getContext(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
                 send_sms();
                 Toast.makeText(getContext(), "Submit", Toast.LENGTH_SHORT).show();
             } else {
-                ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.SEND_SMS},0);
+                ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.SEND_SMS, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION}, 0);
 
-                //ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.READ_PHONE_STATE}, 0);
-                           }
+
+            }
         });
 
-       // if(ActivityCompat.shouldShowRequestPermissionRationale(getActivity(),new String[]{M)){}
+
         return v;
     }
 
     private void send_sms() {
 
 
-        SmsManager smsManager = SmsManager.getDefault();
-           smsManager.sendTextMessage("+91-8307129903", null, "http://maps.google.com/", null, null);
+        if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
+        fusedLocationProviderClient.getLastLocation().addOnSuccessListener(location -> {
+
+            String message = getMessage();
+            SmsManager smsManager = SmsManager.getDefault();
+
+            String string3 = "http://maps.google.com/?q=" +
+                    (location.getLatitude()) +
+                    "," +
+                    (location.getLongitude());
+
+            String string2 = message +
+                    "\n\nPlease reach ASAP to the given location below\n\n" +
+                    string3;
+            ArrayList<String> arrayList = smsManager.divideMessage(string2);
+//        while (cursor.moveToNext()) {
+//            smsManager.sendMultipartTextMessage(cursor.getString(1), null, arrayList, null, null);
+//        }
+
+            smsManager.sendMultipartTextMessage("+91-8307129903", null, arrayList, null, null);
+            // Toast.makeText(getContext(), "" + arrayList, Toast.LENGTH_SHORT).show();
+
+        });
 
 
     }
+
+    private String getMessage() {
+        Conn conn = new Conn(getContext());
+        String message = null;
+        Cursor cursor = conn.get_message();
+        if (cursor.moveToFirst())
+            message = cursor.getString(1);
+        return message;
+    }
+
+
 }
+
+

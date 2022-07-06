@@ -1,6 +1,5 @@
 package com.example.saviour;
 
-import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -32,11 +31,6 @@ public class Conn extends SQLiteOpenHelper {
 
         sqLiteDatabase.execSQL("insert into sosmessage values(null,\"HELP Me! IT'S AN EMERGANCY\");");
 
-        sqLiteDatabase.execSQL("CREATE TABLE user (\n" +
-                "    id          INTEGER PRIMARY KEY ASC AUTOINCREMENT\n" +
-                "                        NOT NULL,\n" +
-                "    name      STRING  NOT NULL,\n" +
-                "    mobile        STRING  NOT NULL);");
 
 
     }
@@ -60,20 +54,17 @@ public class Conn extends SQLiteOpenHelper {
     public Cursor get_members() {
         SQLiteDatabase db = this.getWritableDatabase();
 
-        @SuppressLint("Recycle") Cursor number = db.rawQuery("SELECT * FROM members;", null);
-
-        //return String.valueOf(number.getCount());
-        return number;
+        return db.rawQuery("SELECT * FROM members;", null);
     }
 
 
-    public Cursor message_get_value() {
+    public Cursor get_message() {
         SQLiteDatabase db = this.getWritableDatabase();
 
-        return db.rawQuery("select * from sosmessage", null);
+        return db.rawQuery("select * from sosmessage;", null);
     }
 
-    public boolean uupdate_message(String message) {
+    public boolean update_message(String message) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         db.execSQL("update sosmessage set message='" + message + "' where id=1;");
