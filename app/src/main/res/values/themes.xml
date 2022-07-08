@@ -4,7 +4,7 @@
 <!--    <style name="Theme.Dark.Saviour" parent="Theme.MaterialComponents.DayNight.NoActionBar">-->
         <!-- Primary brand color. -->
         <item name="colorPrimary">#008DFF</item>
-        <item name="colorPrimaryVariant">@color/green</item>
+        <item name="colorPrimaryVariant">@color/blue</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">#00C853</item>
