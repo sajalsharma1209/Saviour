@@ -3,9 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg"
     android:orientation="vertical"
-    tools:context=".Main_Activity.Menu_Add_Members.Add_Number">
+    android:background="@drawable/bg"
+    tools:context=".Main_Activity.Menu_View_Members.Edit_Members">
 
     <ImageView
         android:layout_width="120dp"
@@ -22,16 +22,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="100dp"
-                android:gravity="center"
-                android:text="@string/you_can_register_upto_10_contact_numbers"
-                android:textColor="@color/red"
-                android:textSize="18sp" />
+            android:orientation="vertical"
+            android:layout_marginTop="@dimen/_80sdp">
 
 
             <TextView
@@ -80,24 +72,15 @@
                 tools:ignore="Autofill" />
 
             <Button
-                android:id="@+id/submit"
+                android:id="@+id/editbutton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
-                android:text="@string/submit"
+                android:text="@string/save"
                 android:textColor="#212121" />
 
 
-            <TextView
-                android:id="@+id/txtnumbercount"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="80dp"
-                android:gravity="center"
-                android:text="@string/you_can_register_upto_10_contact_numbers"
-                android:textColor="#C51162"
-                android:textSize="18sp" />
 
 
         </LinearLayout>

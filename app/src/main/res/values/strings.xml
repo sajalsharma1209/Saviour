@@ -9,7 +9,7 @@
     <string name="instructions">Instructions</string>
     <string name="register_number">Add Members</string>
     <string name="rate_us">Rate us</string>
-    <string name="delete_number">Delete Members</string>
+    <string name="delete_number">Selected Members</string>
     <string name="view_register_numbers">View Members</string>
     <string name="edit_sos_message">Edit SOS Message</string>
     <string name="other_help">Other_Help</string>

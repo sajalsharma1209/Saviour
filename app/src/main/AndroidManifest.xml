@@ -3,9 +3,8 @@
     package="com.example.saviour">
 
     <uses-permission android:name="android.permission.SEND_SMS" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -15,9 +14,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Saviour">
         <activity
+            android:name=".Main_Activity.Menu_View_Members.Edit_Members"
+            android:exported="false" />
+        <activity
             android:name=".Main_Activity.Menu_Rate_Us.Rate_Us"
-            android:exported="true">
-        </activity>
+            android:exported="true" />
         <activity
             android:name=".Main_Activity.Menu_View_Members.View_Members"
             android:exported="false" />
@@ -38,8 +39,10 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
     </application>
+
 </manifest>

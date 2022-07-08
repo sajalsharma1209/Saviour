@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.IntentSender;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
-import android.location.Location;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
@@ -16,7 +15,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
@@ -31,8 +29,6 @@ import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.LocationSettingsRequest;
 import com.google.android.gms.location.LocationSettingsResponse;
 import com.google.android.gms.location.LocationSettingsStatusCodes;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 
 import java.util.ArrayList;
@@ -106,7 +102,7 @@ public class Home extends Fragment {
                 //send_sms();
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
                     if (locationManager.isLocationEnabled()) {
-                        send_sms();
+                        // send_sms();
                         //Toast.makeText(getContext(), "Submit", Toast.LENGTH_SHORT).show();
                     } else {
                         displayLocationSettingsRequest(getContext());
@@ -140,29 +136,26 @@ public class Home extends Fragment {
             return;
         }
 
-        fusedLocationProviderClient.getLastLocation().addOnSuccessListener(new OnSuccessListener<Location>() {
-            @Override
-            public void onSuccess(Location location) {
+        fusedLocationProviderClient.getLastLocation().addOnSuccessListener(location -> {
 
 
-                String string3 = "http://maps.google.com/?q=" +
-                        (location.getLatitude()) +
-                        "," +
-                        (location.getLongitude());
+            String string3 = "http://maps.google.com/?q=" +
+                    (location.getLatitude()) +
+                    "," +
+                    (location.getLongitude());
 
-                String string2 = message +
-                        "\n\nPlease reach ASAP to the given location below\n\n" +
-                        string3;
-                ArrayList<String> arrayList = smsManager.divideMessage(string2);
+            String string2 = message +
+                    "\n\nPlease reach ASAP to the given location below\n\n" +
+                    string3;
+            ArrayList<String> arrayList = smsManager.divideMessage(string2);
 //                while (cursor.moveToNext()) {
 //                    smsManager.sendMultipartTextMessage(cursor.getString(2), null, arrayList, null, null);
 //                    Toast.makeText(Home.this.getContext(), "SOS Message sent to " + cursor.getString(1), Toast.LENGTH_SHORT).show();
 //                }
 
-                smsManager.sendMultipartTextMessage("+91-8307129903", null, arrayList, null, null);
-                Toast.makeText(getContext(), "" + arrayList, Toast.LENGTH_SHORT).show();
+            smsManager.sendMultipartTextMessage("+91-8307129903", null, arrayList, null, null);
+            Toast.makeText(getContext(), "" + arrayList, Toast.LENGTH_SHORT).show();
 
-            }
         });
 
     }
@@ -182,7 +175,7 @@ public class Home extends Fragment {
         LocationRequest mLocationRequest = LocationRequest.create()
                 .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
                 .setInterval(10 * 1000)
-                .setFastestInterval(1 * 1000);
+                .setFastestInterval(1000);
 
         LocationSettingsRequest.Builder settingsBuilder = new LocationSettingsRequest.Builder()
                 .addLocationRequest(mLocationRequest);
@@ -191,32 +184,29 @@ public class Home extends Fragment {
         Task<LocationSettingsResponse> result = LocationServices.getSettingsClient(getContext())
                 .checkLocationSettings(settingsBuilder.build());
 
-        result.addOnCompleteListener(new OnCompleteListener<LocationSettingsResponse>() {
-            @Override
-            public void onComplete(@NonNull Task<LocationSettingsResponse> task) {
-                try {
-                    LocationSettingsResponse response =
-                            task.getResult(ApiException.class);
-                } catch (ApiException ex) {
-                    switch (ex.getStatusCode()) {
-                        case LocationSettingsStatusCodes.RESOLUTION_REQUIRED:
-                            try {
-                                ResolvableApiException resolvableApiException =
-                                        (ResolvableApiException) ex;
-                                resolvableApiException
-                                        .startResolutionForResult(getActivity(), 101);
+        result.addOnCompleteListener(task -> {
+            try {
+                LocationSettingsResponse response =
+                        task.getResult(ApiException.class);
+            } catch (ApiException ex) {
+                switch (ex.getStatusCode()) {
+                    case LocationSettingsStatusCodes.RESOLUTION_REQUIRED:
+                        try {
+                            ResolvableApiException resolvableApiException =
+                                    (ResolvableApiException) ex;
+                            resolvableApiException
+                                    .startResolutionForResult(getActivity(), 101);
 
-                            } catch (IntentSender.SendIntentException e) {
+                        } catch (IntentSender.SendIntentException e) {
+                            e.printStackTrace();
 
-                            }
-                            break;
-                        case LocationSettingsStatusCodes.SETTINGS_CHANGE_UNAVAILABLE:
+                        }
+                        break;
+                    case LocationSettingsStatusCodes.SETTINGS_CHANGE_UNAVAILABLE:
 
-                            break;
-                    }
+                        break;
                 }
             }
-
         });
 
     }

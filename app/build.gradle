@@ -50,4 +50,10 @@ dependencies {
     // round image view
     implementation 'com.makeramen:roundedimageview:2.3.0'
 
+    // https://mvnrepository.com/artifact/it.xabaras.android/recyclerview-swipedecorator
+    //implementation 'it.xabaras.android:recyclerview-swipedecorator:1.2.2'
+
+    implementation 'com.github.xabaras:RecyclerViewSwipeDecorator:1.4'
+
+
 }

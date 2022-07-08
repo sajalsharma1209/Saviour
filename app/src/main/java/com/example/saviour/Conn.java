@@ -32,7 +32,6 @@ public class Conn extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL("insert into sosmessage values(null,\"HELP Me! IT'S AN EMERGANCY\");");
 
 
-
     }
 
     @Override
@@ -70,6 +69,20 @@ public class Conn extends SQLiteOpenHelper {
         db.execSQL("update sosmessage set message='" + message + "' where id=1;");
 
         return true;
+    }
+
+    public void update_member(String id, String name, String mobile) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        db.execSQL("update members set name='" + name + "',mobile='" + mobile + "' where id='" + id + "';");
+
+    }
+
+    public void delete_member(String id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        db.execSQL("delete from members where id='" + id + "';");
+
     }
 
 
