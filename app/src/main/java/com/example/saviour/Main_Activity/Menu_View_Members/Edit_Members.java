@@ -1,5 +1,6 @@
 package com.example.saviour.Main_Activity.Menu_View_Members;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
@@ -8,6 +9,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.saviour.Conn;
+import com.example.saviour.Main_Activity.Menu;
 import com.example.saviour.R;
 
 public class Edit_Members extends AppCompatActivity {
@@ -37,8 +39,8 @@ public class Edit_Members extends AppCompatActivity {
             conn.update_member(id, editname, editmobile);
 
             Toast.makeText(this, "Successfully updated", Toast.LENGTH_SHORT).show();
-            name.setText("");
-            mobile.setText("");
+            Intent intent = new Intent(Edit_Members.this, View_Members.class);
+            startActivity(intent);
 
         });
     }

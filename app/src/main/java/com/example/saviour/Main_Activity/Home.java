@@ -40,14 +40,11 @@ import java.util.ArrayList;
  */
 public class Home extends Fragment {
 
-    FusedLocationProviderClient fusedLocationProviderClient;
-
-
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-
+    FusedLocationProviderClient fusedLocationProviderClient;
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
@@ -84,7 +81,8 @@ public class Home extends Fragment {
     }
 
 
-    @SuppressLint("RestrictedApi")
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -99,13 +97,13 @@ public class Home extends Fragment {
         clicksasbutton = v.findViewById(R.id.sosclickbutton);
         clicksasbutton.setOnClickListener(view -> {
             if (ActivityCompat.checkSelfPermission(v.getContext(), Manifest.permission.SEND_SMS) == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(v.getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(v.getContext(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-                //send_sms();
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
                     if (locationManager.isLocationEnabled()) {
-                        // send_sms();
+                        send_sms();
                         //Toast.makeText(getContext(), "Submit", Toast.LENGTH_SHORT).show();
                     } else {
                         displayLocationSettingsRequest(getContext());
+                        Toast.makeText(getContext(), "Android", Toast.LENGTH_SHORT).show();
                     }
                 }
 
@@ -148,14 +146,10 @@ public class Home extends Fragment {
                     "\n\nPlease reach ASAP to the given location below\n\n" +
                     string3;
             ArrayList<String> arrayList = smsManager.divideMessage(string2);
-//                while (cursor.moveToNext()) {
-//                    smsManager.sendMultipartTextMessage(cursor.getString(2), null, arrayList, null, null);
-//                    Toast.makeText(Home.this.getContext(), "SOS Message sent to " + cursor.getString(1), Toast.LENGTH_SHORT).show();
-//                }
-
-            smsManager.sendMultipartTextMessage("+91-8307129903", null, arrayList, null, null);
-            Toast.makeText(getContext(), "" + arrayList, Toast.LENGTH_SHORT).show();
-
+            while (cursor.moveToNext()) {
+                smsManager.sendMultipartTextMessage(cursor.getString(2), null, arrayList, null, null);
+                Toast.makeText(Home.this.getContext(), "SOS Message sent to " + cursor.getString(1), Toast.LENGTH_SHORT).show();
+            }
         });
 
     }

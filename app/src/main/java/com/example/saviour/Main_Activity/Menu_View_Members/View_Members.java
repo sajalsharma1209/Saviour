@@ -25,34 +25,6 @@ public class View_Members extends AppCompatActivity {
     ArrayList<View_Members_Model> datalist;
     View_Members_Adapter adapter;
     Conn conn = new Conn(this);
-
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_view_members);
-        setTitle("Members List");
-
-        recyclerView = findViewById(R.id.recyclerview);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-        datalist = new ArrayList<>();
-
-        Cursor cursor = conn.get_members();
-
-        if (cursor != null && cursor.getCount() > 0) {
-            while (cursor.moveToNext()) {
-                View_Members_Model obj = new View_Members_Model(cursor.getString(0), cursor.getString(1), cursor.getString(2));
-                datalist.add(obj);
-            }
-            adapter = new View_Members_Adapter(datalist);
-            recyclerView.setAdapter(adapter);
-        }
-        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleCallback);
-        itemTouchHelper.attachToRecyclerView(recyclerView);
-
-    }
-
     ItemTouchHelper.SimpleCallback simpleCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
         @Override
         public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
@@ -105,6 +77,31 @@ public class View_Members extends AppCompatActivity {
 
         }
     };
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_view_members);
+        setTitle("Members List");
+
+        recyclerView = findViewById(R.id.recyclerview);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        datalist = new ArrayList<>();
+
+        Cursor cursor = conn.get_members();
+
+        if (cursor != null && cursor.getCount() > 0) {
+            while (cursor.moveToNext()) {
+                View_Members_Model obj = new View_Members_Model(cursor.getString(0), cursor.getString(1), cursor.getString(2));
+                datalist.add(obj);
+            }
+            adapter = new View_Members_Adapter(datalist);
+            recyclerView.setAdapter(adapter);
+        }
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleCallback);
+        itemTouchHelper.attachToRecyclerView(recyclerView);
+
+    }
 
 
 }
