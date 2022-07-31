@@ -2,15 +2,19 @@ package com.example.saviour.Main_Activity.Menu_Add_Members;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.saviour.Conn;
 import com.example.saviour.R;
+
+import java.util.Objects;
 
 public class Add_Number extends AppCompatActivity {
 
@@ -25,6 +29,7 @@ public class Add_Number extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_number);
         setTitle("Add Members");
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
         name = findViewById(R.id.name);
         mobile = findViewById(R.id.mobile);
@@ -70,9 +75,14 @@ public class Add_Number extends AppCompatActivity {
                         }
                     }
                 }
-
-
         });
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

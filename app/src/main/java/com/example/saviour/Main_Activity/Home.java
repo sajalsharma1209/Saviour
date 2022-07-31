@@ -15,7 +15,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
@@ -49,6 +48,10 @@ public class Home extends Fragment {
     private static final String ARG_PARAM2 = "param2";
 
     FusedLocationProviderClient fusedLocationProviderClient;
+    LocationCallback locationCallback;
+    LocationRequest mLocationRequest;
+    boolean resumeToGetLocation = true;
+
     double lat, log;
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -95,6 +98,25 @@ public class Home extends Fragment {
         LocationManager locationManager = (LocationManager) getContext().getSystemService(Context.LOCATION_SERVICE);
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_home, container, false);
+
+        locationCallback = new LocationCallback() {
+            @Override
+            public void onLocationResult(LocationResult locationResult) {
+                if (locationResult == null) {
+                    return;
+                }
+                for (Location location : locationResult.getLocations()) {
+                    lat = location.getLatitude();
+                    log = location.getLongitude();
+                }
+            }
+        };
+
+        mLocationRequest = LocationRequest.create()
+                .setPriority(100)
+                .setInterval(3000L)
+                .setFastestInterval(1000L);
+
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(getContext());
 
         clicksasbutton = v.findViewById(R.id.sosclickbutton);
@@ -109,13 +131,47 @@ public class Home extends Fragment {
                     //Toast.makeText(getContext(), "Android", Toast.LENGTH_SHORT).show();
                 }
 
-
             } else {
                 ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.SEND_SMS, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION}, 0);
             }
         });
 
         return v;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (resumeToGetLocation) {
+            startLocationUpdates();
+        }
+    }
+
+    private void startLocationUpdates() {
+        if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
+        fusedLocationProviderClient.requestLocationUpdates(mLocationRequest,
+                locationCallback,
+                Looper.getMainLooper());
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        stopLocationUpdates();
+    }
+
+    private void stopLocationUpdates() {
+        resumeToGetLocation = true;
+        fusedLocationProviderClient.removeLocationUpdates(locationCallback);
     }
 
     private void send_sms() {
@@ -138,9 +194,12 @@ public class Home extends Fragment {
         }
 
         fusedLocationProviderClient.getLastLocation().addOnSuccessListener(location -> {
-            lat = location.getLatitude();
-            log = location.getLongitude();
-
+            if (location != null) {
+                lat = location.getLatitude();
+                log = location.getLongitude();
+            }
+            startLocationUpdates();
+            resumeToGetLocation = false;
 
             String string3 = "http://maps.google.com/?q=" +
                     (lat) +
@@ -171,21 +230,6 @@ public class Home extends Fragment {
 
     private void displayLocationSettingsRequest(Context context) {
 
-        LocationCallback locationCallback = new LocationCallback() {
-            @Override
-            public void onLocationResult(@NonNull LocationResult locationResult) {
-                super.onLocationResult(locationResult);
-
-                Location location = locationResult.getLastLocation();
-                lat = location.getLatitude();
-                log = location.getLongitude();
-            }
-        };
-
-        LocationRequest mLocationRequest = LocationRequest.create()
-                .setPriority(100)
-                .setInterval(3000L)
-                .setFastestInterval(1000L);
 
         LocationSettingsRequest.Builder settingsBuilder = new LocationSettingsRequest.Builder()
                 .addLocationRequest(mLocationRequest);
@@ -217,19 +261,15 @@ public class Home extends Fragment {
                                 // for ActivityCompat#requestPermissions for more details.
                                 return;
                             }
-                            fusedLocationProviderClient.requestLocationUpdates(mLocationRequest, locationCallback, Looper.myLooper());
 
                         } catch (IntentSender.SendIntentException e) {
                             e.printStackTrace();
-
                         }
                         break;
                     case LocationSettingsStatusCodes.SETTINGS_CHANGE_UNAVAILABLE:
-
                         break;
                 }
             }
         });
-
     }
 }
