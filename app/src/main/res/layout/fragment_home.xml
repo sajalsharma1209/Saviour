@@ -40,9 +40,9 @@
 
             <ImageView
                 android:layout_width="wrap_content"
-                android:layout_height="270dp"
+                android:layout_height="wrap_content"
                 android:src="@drawable/sos"
-                tools:ignore="ContentDescription,ImageContrastCheck" />
+                tools:ignore="ContentDescription"/>
 
         </androidx.cardview.widget.CardView>
 

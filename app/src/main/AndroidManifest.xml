@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.saviour">
 
     <uses-permission android:name="android.permission.SEND_SMS" />
@@ -8,12 +9,13 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/icon_logo"
+        android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:roundIcon="@drawable/icon_logo"
-        android:supportsRtl="true"
+        android:debuggable="false"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:theme="@style/Theme.Saviour"
+        tools:ignore="HardcodedDebugMode">
 
-        android:theme="@style/Theme.Saviour">
         <activity
             android:name=".Main_Activity.Menu_View_Members.Edit_Members"
             android:exported="false" />
