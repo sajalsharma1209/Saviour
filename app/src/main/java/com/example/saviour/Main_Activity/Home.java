@@ -1,6 +1,7 @@
 package com.example.saviour.Main_Activity;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
 import android.content.IntentSender;
 import android.content.pm.PackageManager;
@@ -15,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
@@ -32,8 +34,15 @@ import com.google.android.gms.location.LocationSettingsRequest;
 import com.google.android.gms.location.LocationSettingsResponse;
 import com.google.android.gms.location.LocationSettingsStatusCodes;
 import com.google.android.gms.tasks.Task;
+import com.karumi.dexter.Dexter;
+import com.karumi.dexter.MultiplePermissionsReport;
+import com.karumi.dexter.PermissionToken;
+import com.karumi.dexter.listener.PermissionRequest;
+import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -48,7 +57,7 @@ public class Home extends Fragment {
     private static final String ARG_PARAM2 = "param2";
 
     FusedLocationProviderClient fusedLocationProviderClient;
-    LocationCallback locationCallback;
+
     LocationRequest mLocationRequest;
     boolean resumeToGetLocation = true;
 
@@ -60,7 +69,6 @@ public class Home extends Fragment {
     public Home() {
         // Required empty public constructor
     }
-
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
@@ -89,39 +97,57 @@ public class Home extends Fragment {
     }
 
 
+    LocationCallback locationCallback = new LocationCallback() {
+        @Override
+        public void onLocationResult(@NonNull LocationResult locationResult) {
+            for (Location location : locationResult.getLocations()) {
+                lat = location.getLatitude();
+                log = location.getLongitude();
+            }
+        }
+    };
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (resumeToGetLocation) {
+            startLocationUpdates();
+        }
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-
         CardView clicksasbutton;
-        LocationManager locationManager = (LocationManager) getContext().getSystemService(Context.LOCATION_SERVICE);
+        LocationManager locationManager = (LocationManager) requireContext().getSystemService(Context.LOCATION_SERVICE);
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_home, container, false);
 
-        locationCallback = new LocationCallback() {
-            @Override
-            public void onLocationResult(LocationResult locationResult) {
-                if (locationResult == null) {
-                    return;
-                }
-                for (Location location : locationResult.getLocations()) {
-                    lat = location.getLatitude();
-                    log = location.getLongitude();
-                }
-            }
-        };
+        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(requireContext());
 
-        mLocationRequest = LocationRequest.create()
-                .setPriority(100)
-                .setInterval(3000L)
-                .setFastestInterval(1000L);
+        Dexter.withContext(getContext())
+                .withPermissions(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.SEND_SMS, Manifest.permission.READ_PHONE_STATE)
+                .withListener(new MultiplePermissionsListener() {
+                    @Override
+                    public void onPermissionsChecked(MultiplePermissionsReport multiplePermissionsReport) {
 
-        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(getContext());
+                    }
+
+                    @Override
+                    public void onPermissionRationaleShouldBeShown(List<PermissionRequest> list, PermissionToken permissionToken) {
+                        permissionToken.continuePermissionRequest();
+                    }
+                }).check();
+
+        if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+            displayLocationSettingsRequest(v.getContext());
+        }
+
 
         clicksasbutton = v.findViewById(R.id.sosclickbutton);
         clicksasbutton.setOnClickListener(view -> {
-            if (ActivityCompat.checkSelfPermission(v.getContext(), Manifest.permission.SEND_SMS) == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(v.getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(v.getContext(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            if (ActivityCompat.checkSelfPermission(v.getContext(), Manifest.permission.SEND_SMS) == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(v.getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(v.getContext(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.READ_PHONE_STATE) == PackageManager.PERMISSION_GRANTED) {
 
                 if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
                     send_sms();
@@ -132,7 +158,7 @@ public class Home extends Fragment {
                 }
 
             } else {
-                ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.SEND_SMS, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION}, 0);
+                ActivityCompat.requestPermissions(requireActivity(), new String[]{Manifest.permission.SEND_SMS, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.READ_PHONE_STATE}, 0);
             }
         });
 
@@ -140,15 +166,13 @@ public class Home extends Fragment {
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-        if (resumeToGetLocation) {
-            startLocationUpdates();
-        }
+    public void onPause() {
+        super.onPause();
+        stopLocationUpdates();
     }
 
     private void startLocationUpdates() {
-        if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+        if (ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
             //    ActivityCompat#requestPermissions
             // here to request the missing permissions, and then overriding
@@ -158,15 +182,16 @@ public class Home extends Fragment {
             // for ActivityCompat#requestPermissions for more details.
             return;
         }
+        // fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(getContext());
+        mLocationRequest = LocationRequest.create()
+                .setPriority(100)
+                .setInterval(5)
+                .setFastestInterval(0);
+
+
         fusedLocationProviderClient.requestLocationUpdates(mLocationRequest,
                 locationCallback,
                 Looper.getMainLooper());
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        stopLocationUpdates();
     }
 
     private void stopLocationUpdates() {
@@ -182,7 +207,7 @@ public class Home extends Fragment {
         Conn conn = new Conn(getContext());
         Cursor cursor = conn.get_members();
 
-        if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+        if (ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.READ_PHONE_STATE) == PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
             //    ActivityCompat#requestPermissions
             // here to request the missing permissions, and then overriding
@@ -193,13 +218,17 @@ public class Home extends Fragment {
             return;
         }
 
+        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(requireContext());
         fusedLocationProviderClient.getLastLocation().addOnSuccessListener(location -> {
             if (location != null) {
                 lat = location.getLatitude();
                 log = location.getLongitude();
+            } else {
+                startLocationUpdates();
+                resumeToGetLocation = false;
+
             }
-            startLocationUpdates();
-            resumeToGetLocation = false;
+
 
             String string3 = "http://maps.google.com/?q=" +
                     (lat) +
@@ -227,7 +256,6 @@ public class Home extends Fragment {
         return message;
     }
 
-
     private void displayLocationSettingsRequest(Context context) {
 
 
@@ -235,7 +263,7 @@ public class Home extends Fragment {
                 .addLocationRequest(mLocationRequest);
         settingsBuilder.setAlwaysShow(true);
 
-        Task<LocationSettingsResponse> result = LocationServices.getSettingsClient(getContext())
+        Task<LocationSettingsResponse> result = LocationServices.getSettingsClient(requireContext())
                 .checkLocationSettings(settingsBuilder.build());
 
         result.addOnCompleteListener(task -> {
@@ -249,18 +277,7 @@ public class Home extends Fragment {
                             ResolvableApiException resolvableApiException =
                                     (ResolvableApiException) ex;
                             resolvableApiException
-                                    .startResolutionForResult(getActivity(), 101);
-
-                            if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                                // TODO: Consider calling
-                                //    ActivityCompat#requestPermissions
-                                // here to request the missing permissions, and then overriding
-                                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                                //                                          int[] grantResults)
-                                // to handle the case where the user grants the permission. See the documentation
-                                // for ActivityCompat#requestPermissions for more details.
-                                return;
-                            }
+                                    .startResolutionForResult((Activity) requireContext(), 101);
 
                         } catch (IntentSender.SendIntentException e) {
                             e.printStackTrace();

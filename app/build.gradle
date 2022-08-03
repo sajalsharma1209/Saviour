@@ -55,5 +55,8 @@ dependencies {
 
     implementation 'com.github.xabaras:RecyclerViewSwipeDecorator:1.4'
 
+    // https://mvnrepository.com/artifact/com.karumi/dexter
+    implementation 'com.karumi:dexter:6.2.3'
+
 
 }

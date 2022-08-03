@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
@@ -66,7 +67,7 @@ public class Menu extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        CardView card1, card2, card3, card4, card5;
+        CardView card1, card2, card3, card4, card5, card6;
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_menu, container, false);
         card1 = v.findViewById(R.id.instruction);
@@ -74,6 +75,7 @@ public class Menu extends Fragment {
         card3 = v.findViewById(R.id.editmessage);
         card4 = v.findViewById(R.id.view_members);
         card5 = v.findViewById(R.id.rating);
+        card6 = v.findViewById(R.id.about);
         card1.setOnClickListener(v1 -> {
             Intent intent = new Intent(Menu.this.getActivity(), instructions.class);
             Menu.this.startActivity(intent);
@@ -96,7 +98,9 @@ public class Menu extends Fragment {
             Intent intent = new Intent(Menu.this.getActivity(), Rate_Us.class);
             Menu.this.startActivity(intent);
         });
+        card6.setOnClickListener(view -> {
 
+        });
         return v;
     }
 }
