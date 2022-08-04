@@ -30,7 +30,7 @@ public class View_Members_Adapter extends RecyclerView.Adapter<View_Members_Adap
     public void onBindViewHolder(@NonNull myviewholder holder, int position) {
         holder.id.setText(dataList.get(position).getId());
         holder.name.setText(dataList.get(position).getName());
-        holder.mobile.setText(dataList.get(position).getMobile());
+        holder.mobile.setText(dataList.get(position).getMobile().substring(4));
 
     }
 
