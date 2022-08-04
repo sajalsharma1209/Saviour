@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/aboutus"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginBottom="10dp"
+        android:gravity="center_horizontal"
+        android:text="@string/about"
+        android:textColor="#DD2C00"
+        android:textSize="40sp"
+        android:textStyle="italic" />
+    <TextView
+        android:id="@+id/developed"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/aboutus"
+        android:text="@string/developed_by_sajal_toshak_tanishk_nikhil"
+        android:gravity="center_horizontal"
+        android:textSize="18sp"
+        android:textColor="#FFAB00"/>
+
+    <Button
+        android:id="@+id/buttonOk"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/developed"
+        android:layout_margin="15dp"
+        android:text="@string/ok"/>
+
+
+</RelativeLayout>

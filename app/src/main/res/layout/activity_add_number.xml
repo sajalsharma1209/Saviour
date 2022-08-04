@@ -93,7 +93,7 @@
                 android:id="@+id/txtnumbercount"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="80dp"
+                android:layout_marginTop="30dp"
                 android:gravity="center"
                 android:text="@string/you_can_register_upto_10_contact_numbers"
                 android:textColor="#C51162"

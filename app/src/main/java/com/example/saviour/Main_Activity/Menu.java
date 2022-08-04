@@ -1,18 +1,18 @@
 package com.example.saviour.Main_Activity;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
+import android.widget.Button;
 
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
 import com.example.saviour.Main_Activity.Menu_Add_Members.Add_Number;
 import com.example.saviour.Main_Activity.Menu_Edit_Sos_Message.Edit_Sos_Message;
-import com.example.saviour.Main_Activity.Menu_Instruction.instructions;
 import com.example.saviour.Main_Activity.Menu_Rate_Us.Rate_Us;
 import com.example.saviour.Main_Activity.Menu_View_Members.View_Members;
 import com.example.saviour.R;
@@ -76,9 +76,12 @@ public class Menu extends Fragment {
         card4 = v.findViewById(R.id.view_members);
         card5 = v.findViewById(R.id.rating);
         card6 = v.findViewById(R.id.about);
+
         card1.setOnClickListener(v1 -> {
-            Intent intent = new Intent(Menu.this.getActivity(), instructions.class);
-            Menu.this.startActivity(intent);
+//            Intent intent = new Intent(Menu.this.getActivity(), instructions.class);
+//            Menu.this.startActivity(intent);
+            instructiondialogBox();
+
         });
 
         card2.setOnClickListener(v2 -> {
@@ -98,9 +101,31 @@ public class Menu extends Fragment {
             Intent intent = new Intent(Menu.this.getActivity(), Rate_Us.class);
             Menu.this.startActivity(intent);
         });
-        card6.setOnClickListener(view -> {
-
-        });
+        card6.setOnClickListener(view -> aboutUsDialogBox());
         return v;
+    }
+
+    private void aboutUsDialogBox() {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        ViewGroup viewGroup = requireActivity().findViewById(android.R.id.content);
+        View dialogView = LayoutInflater.from(requireContext()).inflate(R.layout.dialog_box_about_us, viewGroup, false);
+        Button buttonOk = dialogView.findViewById(R.id.buttonOk);
+        builder.setView(dialogView);
+        final AlertDialog alertDialog = builder.create();
+        buttonOk.setOnClickListener(v -> alertDialog.dismiss());
+        alertDialog.show();
+
+    }
+
+    private void instructiondialogBox() {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        ViewGroup viewGroup = requireActivity().findViewById(android.R.id.content);
+        View dialogView = LayoutInflater.from(requireContext()).inflate(R.layout.dialog_box_instruction, viewGroup, false);
+        Button buttonOk = dialogView.findViewById(R.id.buttonOk);
+        builder.setView(dialogView);
+        final AlertDialog alertDialog = builder.create();
+        buttonOk.setOnClickListener(v -> alertDialog.dismiss());
+        alertDialog.show();
+
     }
 }

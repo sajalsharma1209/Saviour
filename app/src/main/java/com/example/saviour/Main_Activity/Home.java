@@ -115,6 +115,12 @@ public class Home extends Fragment {
     }
 
     @Override
+    public void onPause() {
+        super.onPause();
+        stopLocationUpdates();
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
@@ -162,12 +168,6 @@ public class Home extends Fragment {
         });
 
         return v;
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        stopLocationUpdates();
     }
 
     private void startLocationUpdates() {
@@ -225,7 +225,6 @@ public class Home extends Fragment {
             } else {
                 startLocationUpdates();
                 resumeToGetLocation = false;
-
             }
 
 

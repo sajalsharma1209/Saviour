@@ -43,4 +43,6 @@
     <string name="back">back</string>
     <string name="register_your_emergency_contact_numbers_under_menu_register_number"><![CDATA[Register your Emergency Contact Numbers Under]]><b> MENU->REGISTER NUMBER</b></string>
     <string name="about">About us</string>
+    <string name="developed_by_sajal_toshak_tanishk_nikhil">Developed by: Sajal, Toshak, Tanishk, Nikhil</string>
+    <string name="ok">OK</string>
 </resources>
