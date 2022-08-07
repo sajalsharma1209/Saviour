@@ -1,5 +1,6 @@
 package com.example.saviour.Main_Activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,7 +11,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
-
 
     BottomNavigationView bottomnav;
 
@@ -24,8 +24,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Objects.requireNonNull(getSupportActionBar()).hide();
 
-
         bottomnav = findViewById(R.id.bottom_nav);
+
+        if (new Intent().getBooleanExtra("press", false)) {
+            home.send_sms();
+        }
 
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, home).commit();
 
@@ -42,11 +45,9 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.help:
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, help).commit();
                     return true;
-
             }
             return true;
         });
-
 
     }
 }

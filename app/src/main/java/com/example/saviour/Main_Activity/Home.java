@@ -3,6 +3,7 @@ package com.example.saviour.Main_Activity;
 import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.IntentSender;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -132,7 +133,7 @@ public class Home extends Fragment {
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(requireContext());
 
         Dexter.withContext(getContext())
-                .withPermissions(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.SEND_SMS, Manifest.permission.READ_PHONE_STATE)
+                .withPermissions(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.SEND_SMS, Manifest.permission.READ_PHONE_STATE,Manifest.permission.READ_CONTACTS)
                 .withListener(new MultiplePermissionsListener() {
                     @Override
                     public void onPermissionsChecked(MultiplePermissionsReport multiplePermissionsReport) {
@@ -150,7 +151,9 @@ public class Home extends Fragment {
         }
 
 
+
         clicksasbutton = v.findViewById(R.id.sosclickbutton);
+
         clicksasbutton.setOnClickListener(view -> {
             if (ActivityCompat.checkSelfPermission(v.getContext(), Manifest.permission.SEND_SMS) == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(v.getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(v.getContext(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.READ_PHONE_STATE) == PackageManager.PERMISSION_GRANTED) {
 
@@ -184,7 +187,7 @@ public class Home extends Fragment {
         // fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(getContext());
         mLocationRequest = LocationRequest.create()
                 .setPriority(100)
-                .setInterval(5)
+                .setInterval(1)
                 .setFastestInterval(0);
 
 
@@ -198,7 +201,7 @@ public class Home extends Fragment {
         fusedLocationProviderClient.removeLocationUpdates(locationCallback);
     }
 
-    private void send_sms() {
+    public void send_sms() {
 
 
         String message = getMessage();

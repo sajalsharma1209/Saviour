@@ -4,26 +4,25 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@drawable/bg"
     tools:context=".Main_Activity.Menu_View_Members.Edit_Members">
 
     <ImageView
         android:layout_width="120dp"
         android:layout_height="120dp"
         android:layout_marginStart="130dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="30dp"
         android:src="@drawable/register_number"
         tools:ignore="ContentDescription,ImageContrastCheck" />
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginTop="@dimen/_80sdp">
+            android:orientation="vertical">
 
 
             <TextView

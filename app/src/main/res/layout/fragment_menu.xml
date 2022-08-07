@@ -26,6 +26,7 @@
                 android:layout_marginStart="105dp"
                 android:layout_marginTop="10dp"
                 android:src="@drawable/menu_icon"
+                android:layout_centerHorizontal="true"
                 tools:ignore="ContentDescription" />
 
         </RelativeLayout>
@@ -305,8 +306,6 @@
                 </LinearLayout>
 
             </androidx.cardview.widget.CardView>
-
-
 
         </GridLayout>
 

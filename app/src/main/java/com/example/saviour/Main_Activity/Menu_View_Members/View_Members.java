@@ -64,9 +64,8 @@ public class View_Members extends AppCompatActivity {
 
                     viewHolder.itemView.getContext().startActivity(intent);
                     adapter.notifyDataSetChanged();
-
-
                     break;
+
                 case ItemTouchHelper.RIGHT:
                     String id = datalist.get(position).getId();
                     new Conn(getApplicationContext()).delete_member(id);
@@ -75,8 +74,6 @@ public class View_Members extends AppCompatActivity {
                     adapter.notifyDataSetChanged();
                     break;
             }
-
-
         }
     };
 
@@ -103,7 +100,6 @@ public class View_Members extends AppCompatActivity {
         }
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleCallback);
         itemTouchHelper.attachToRecyclerView(recyclerView);
-
     }
 
     @Override

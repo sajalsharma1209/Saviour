@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item android:id="@+id/contact" android:icon="@drawable/contacts_menu_items"
+        app:showAsAction="always"
+        android:title="@string/add_contact_from_your_contact_list"/>
+
+</menu>

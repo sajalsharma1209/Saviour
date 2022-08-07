@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg"
+    android:background="#E0F2F1"
     android:orientation="vertical"
     tools:context=".Main_Activity.Menu_Edit_Sos_Message.Edit_Sos_Message">
 
