@@ -139,8 +139,6 @@ public class Add_Number extends AppCompatActivity {
                         }
                     }
                 }
-                cursor1.close();
-                cursor2.close();
 
             }
         } 

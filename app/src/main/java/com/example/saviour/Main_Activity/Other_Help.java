@@ -1,10 +1,13 @@
 package com.example.saviour.Main_Activity;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
 import com.example.saviour.R;
@@ -59,7 +62,65 @@ public class Other_Help extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        CardView police, medical, fire, women, covid, other;
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_other__help, container, false);
+        View v = inflater.inflate(R.layout.fragment_other__help, container, false);
+
+        police = v.findViewById(R.id.police);
+        medical = v.findViewById(R.id.medical);
+        fire = v.findViewById(R.id.fire);
+        women = v.findViewById(R.id.women);
+        covid = v.findViewById(R.id.covid);
+        other = v.findViewById(R.id.others);
+
+        police.setOnClickListener(view -> {
+            String number = "100";
+            Intent intent = new Intent(Intent.ACTION_CALL);
+            intent.setData(Uri.parse("tel:" + number));
+            startActivity(intent);
+        });
+
+        medical.setOnClickListener(view -> {
+            //Toast.makeText(requireContext(), "medical", Toast.LENGTH_SHORT).show();
+            String number = "108";
+            Intent intent = new Intent(Intent.ACTION_CALL);
+            intent.setData(Uri.parse("tel:" + number));
+            startActivity(intent);
+
+        });
+
+        fire.setOnClickListener(view -> {
+            //Toast.makeText(requireContext(), "fire", Toast.LENGTH_SHORT).show();
+            String number = "101";
+            Intent intent = new Intent(Intent.ACTION_CALL);
+            intent.setData(Uri.parse("tel:" + number));
+            startActivity(intent);
+
+        });
+
+        women.setOnClickListener(view -> {
+            // Toast.makeText(requireContext(), "women", Toast.LENGTH_SHORT).show();
+            String number = "1090";
+            Intent intent = new Intent(Intent.ACTION_CALL);
+            intent.setData(Uri.parse("tel:" + number));
+            startActivity(intent);
+
+        });
+
+
+        covid.setOnClickListener(view -> {
+            String number = "1075";
+            Intent intent = new Intent(Intent.ACTION_CALL);
+            intent.setData(Uri.parse("tel:" + number));
+            startActivity(intent);
+
+
+        });
+        other.setOnClickListener(view -> {
+
+        });
+
+        return v;
     }
 }

@@ -38,12 +38,17 @@
     <string name="your_mobile_number">Your mobile number</string>
     <string name="your_mobile_number_shoule_be_there_in_this_mobile">Note:—> <u>Your mobile number should be present in this mobile.</u></string>
     <string name="go">Go</string>
-
-    <string name="emergency_help">Emergency Help</string>
+    <string name="emergency_help">Helpline No.</string>
     <string name="back">back</string>
     <string name="register_your_emergency_contact_numbers_under_menu_register_number"><![CDATA[Register your Emergency Contact Numbers Under]]><b> MENU->REGISTER NUMBER</b></string>
     <string name="about">About us</string>
     <string name="developed_by_sajal_toshak_tanishk_nikhil">Developed by: Sajal, Toshak, Tanishk, Nikhil</string>
     <string name="ok">OK</string>
     <string name="add_contact_from_your_contact_list">Add contact from your contact list</string>
+    <string name="police_emergency">Police</string>
+    <string name="medical_emergency">Medical</string>
+    <string name="fire_safety">Fire</string>
+    <string name="women_safety">Women Helpline</string>
+    <string name="other_helpline_no">Other Helpline No</string>
+    <string name="covid">Covid</string>
 </resources>

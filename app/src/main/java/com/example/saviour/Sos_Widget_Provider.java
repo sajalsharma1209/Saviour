@@ -7,16 +7,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.widget.RemoteViews;
 
-import com.example.saviour.Main_Activity.MainActivity;
-
 public class Sos_Widget_Provider extends AppWidgetProvider {
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
         super.onUpdate(context, appWidgetManager, appWidgetIds);
         for (int appwidget : appWidgetIds) {
             Intent intent = new Intent(context, SmsService.class);
-            intent.putExtra("press", true);
-
+           // intent.setFlags(Intent.);
             //PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, 0);
             PendingIntent pendingIntent=PendingIntent.getService(context,0,intent,0);
 

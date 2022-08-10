@@ -35,11 +35,17 @@ import java.util.ArrayList;
 public class SmsService extends Service {
 
     FusedLocationProviderClient fusedLocationProviderClient;
-
     LocationRequest mLocationRequest;
     boolean resumeToGetLocation = true;
 
     double lat, log;
+
+    @Nullable
+    @Override
+    public IBinder onBind(Intent intent) {
+        return null;
+    }
+
     LocationCallback locationCallback = new LocationCallback() {
         @Override
         public void onLocationResult(@NonNull LocationResult locationResult) {
@@ -50,17 +56,12 @@ public class SmsService extends Service {
         }
     };
 
-    @Nullable
-    @Override
-    public IBinder onBind(Intent intent) {
-        return null;
-    }
-
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(getApplicationContext());
         send_sms();
-        return super.onStartCommand(intent, flags, startId);
+        super.onStartCommand(intent, flags, startId);
+        return START_STICKY;
     }
 
     private void startLocationUpdates() {
@@ -75,11 +76,11 @@ public class SmsService extends Service {
             return;
         }
         // fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(getContext());
+
         mLocationRequest = LocationRequest.create()
                 .setPriority(100)
-                .setInterval(1)
+                .setInterval(5)
                 .setFastestInterval(0);
-
 
         fusedLocationProviderClient.requestLocationUpdates(mLocationRequest,
                 locationCallback,
@@ -92,7 +93,6 @@ public class SmsService extends Service {
     }
 
     public void send_sms() {
-
 
         String message = getMessage();
         SmsManager smsManager = SmsManager.getDefault();
@@ -116,10 +116,10 @@ public class SmsService extends Service {
                 lat = location.getLatitude();
                 log = location.getLongitude();
             } else {
+                //stopLocationUpdates();
                 startLocationUpdates();
                 resumeToGetLocation = false;
             }
-
 
             String string3 = "http://maps.google.com/?q=" +
                     (lat) +
@@ -135,7 +135,6 @@ public class SmsService extends Service {
                 Toast.makeText(getApplicationContext(), "SOS Message sent to " + cursor.getString(1), Toast.LENGTH_SHORT).show();
             }
         });
-
     }
 
     private String getMessage() {
@@ -148,7 +147,6 @@ public class SmsService extends Service {
     }
 
     private void displayLocationSettingsRequest(Context context) {
-
 
         LocationSettingsRequest.Builder settingsBuilder = new LocationSettingsRequest.Builder()
                 .addLocationRequest(mLocationRequest);
@@ -181,5 +179,9 @@ public class SmsService extends Service {
         });
     }
 
-
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        stopLocationUpdates();
+    }
 }
