@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
+import com.example.saviour.Main_Activity.Other_help.Others_Helpline;
 import com.example.saviour.R;
 
 /**
@@ -108,16 +109,17 @@ public class Other_Help extends Fragment {
 
         });
 
-
         covid.setOnClickListener(view -> {
             String number = "1075";
             Intent intent = new Intent(Intent.ACTION_CALL);
             intent.setData(Uri.parse("tel:" + number));
             startActivity(intent);
-
-
         });
+
         other.setOnClickListener(view -> {
+
+            Intent intent = new Intent(getContext(), Others_Helpline.class);
+            startActivity(intent);
 
         });
 

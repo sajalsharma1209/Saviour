@@ -9,11 +9,13 @@
         <entry key="..\:/Users/HP-Pc/AndroidStudioProjects/Saviour/app/src/main/res/drawable/back_button.xml" value="0.13" />
         <entry key="..\:/Users/HP-Pc/AndroidStudioProjects/Saviour/app/src/main/res/drawable/bgcolor.xml" value="0.1995" />
         <entry key="..\:/Users/HP-Pc/AndroidStudioProjects/Saviour/app/src/main/res/drawable/button_bg.xml" value="0.13" />
+        <entry key="..\:/Users/HP-Pc/AndroidStudioProjects/Saviour/app/src/main/res/drawable/contacts_menu_items.xml" value="0.1415" />
         <entry key="..\:/Users/HP-Pc/AndroidStudioProjects/Saviour/app/src/main/res/drawable/home.xml" value="0.141" />
         <entry key="..\:/Users/HP-Pc/AndroidStudioProjects/Saviour/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1995" />
         <entry key="..\:/Users/HP-Pc/AndroidStudioProjects/Saviour/app/src/main/res/drawable/slash_screen_layout.xml" value="0.1995" />
         <entry key="..\:/Users/HP-Pc/AndroidStudioProjects/Saviour/app/src/main/res/drawable/slash_screen_layput.xml" value="0.1995" />
         <entry key="..\:/Users/HP-Pc/AndroidStudioProjects/Saviour/app/src/main/res/drawable/splash_screen_layout.xml" value="0.1995" />
+        <entry key="..\:/Users/HP-Pc/AndroidStudioProjects/Saviour/app/src/main/res/drawable/textfield_outline.xml" value="0.1415" />
         <entry key="..\:/Users/HP-Pc/AndroidStudioProjects/Saviour/app/src/main/res/layout-v23/activity_welcome.xml" value="0.21822916666666667" />
         <entry key="..\:/Users/HP-Pc/AndroidStudioProjects/Saviour/app/src/main/res/layout/about_us.xml" value="0.17619848612279226" />
         <entry key="..\:/Users/HP-Pc/AndroidStudioProjects/Saviour/app/src/main/res/layout/activity_add_number.xml" value="0.19398148148148148" />
@@ -21,6 +23,7 @@
         <entry key="..\:/Users/HP-Pc/AndroidStudioProjects/Saviour/app/src/main/res/layout/activity_edit_sos_message.xml" value="0.19398148148148148" />
         <entry key="..\:/Users/HP-Pc/AndroidStudioProjects/Saviour/app/src/main/res/layout/activity_instructions.xml" value="0.2" />
         <entry key="..\:/Users/HP-Pc/AndroidStudioProjects/Saviour/app/src/main/res/layout/activity_main.xml" value="0.176" />
+        <entry key="..\:/Users/HP-Pc/AndroidStudioProjects/Saviour/app/src/main/res/layout/activity_others_helpline.xml" value="0.17606837606837608" />
         <entry key="..\:/Users/HP-Pc/AndroidStudioProjects/Saviour/app/src/main/res/layout/activity_rate_us.xml" value="0.19398148148148148" />
         <entry key="..\:/Users/HP-Pc/AndroidStudioProjects/Saviour/app/src/main/res/layout/activity_view_members.xml" value="0.19398148148148148" />
         <entry key="..\:/Users/HP-Pc/AndroidStudioProjects/Saviour/app/src/main/res/layout/activity_welcome.xml" value="0.19398148148148148" />
@@ -30,6 +33,7 @@
         <entry key="..\:/Users/HP-Pc/AndroidStudioProjects/Saviour/app/src/main/res/layout/fragment_other__help.xml" value="0.17325483599663583" />
         <entry key="..\:/Users/HP-Pc/AndroidStudioProjects/Saviour/app/src/main/res/layout/instruction.xml" value="0.17905982905982906" />
         <entry key="..\:/Users/HP-Pc/AndroidStudioProjects/Saviour/app/src/main/res/layout/login.xml" value="0.21822916666666667" />
+        <entry key="..\:/Users/HP-Pc/AndroidStudioProjects/Saviour/app/src/main/res/layout/other_helpline_single.xml" value="0.17606837606837608" />
         <entry key="..\:/Users/HP-Pc/AndroidStudioProjects/Saviour/app/src/main/res/layout/sos_widget.xml" value="0.17619848612279226" />
         <entry key="..\:/Users/HP-Pc/AndroidStudioProjects/Saviour/app/src/main/res/layout/splash_screen.xml" value="0.21822916666666667" />
         <entry key="..\:/Users/HP-Pc/AndroidStudioProjects/Saviour/app/src/main/res/layout/view_members_single.xml" value="0.19398148148148148" />

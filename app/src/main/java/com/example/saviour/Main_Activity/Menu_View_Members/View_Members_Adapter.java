@@ -8,9 +8,11 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.saviour.Main_Activity.Other_help.HelpLineModel;
 import com.example.saviour.R;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class View_Members_Adapter extends RecyclerView.Adapter<View_Members_Adapter.myviewholder>{
     ArrayList<View_Members_Model> dataList;
@@ -43,12 +45,12 @@ public class View_Members_Adapter extends RecyclerView.Adapter<View_Members_Adap
         TextView id,name,mobile;
         public myviewholder(@NonNull View itemView) {
             super(itemView);
-
             id=itemView.findViewById(R.id.id);
             name=itemView.findViewById(R.id.name);
             mobile=itemView.findViewById(R.id.mobile);
         }
     }
+
 
 
 }
