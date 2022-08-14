@@ -1,6 +1,7 @@
 package com.example.saviour.Main_Activity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,6 +13,8 @@ import androidx.fragment.app.Fragment;
 
 import com.example.saviour.Main_Activity.Other_help.Others_Helpline;
 import com.example.saviour.R;
+
+import cn.pedant.SweetAlert.SweetAlertDialog;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -77,43 +80,76 @@ public class Other_Help extends Fragment {
 
         police.setOnClickListener(view -> {
             String number = "100";
-            Intent intent = new Intent(Intent.ACTION_CALL);
-            intent.setData(Uri.parse("tel:" + number));
-            startActivity(intent);
+
+            new SweetAlertDialog(requireContext(), SweetAlertDialog.WARNING_TYPE)
+                    .setTitleText("Alert!")
+                    .setContentText("Do you want to continue this call")
+                    .setConfirmButton("Call", sweetAlertDialog -> {
+                        Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + number));
+                        //intent.setData(Uri.parse("tel:" + number));
+                        startActivity(intent);
+                    })
+                    .setCancelText("Cancel")
+                    .show();
         });
 
         medical.setOnClickListener(view -> {
-            //Toast.makeText(requireContext(), "medical", Toast.LENGTH_SHORT).show();
             String number = "108";
-            Intent intent = new Intent(Intent.ACTION_CALL);
-            intent.setData(Uri.parse("tel:" + number));
-            startActivity(intent);
+            new SweetAlertDialog(requireContext(), SweetAlertDialog.WARNING_TYPE)
+                    .setTitleText("Alert!")
+                    .setContentText("Do you want to continue this call")
+                    .setConfirmButton("Call", sweetAlertDialog -> {
+                        Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + number));
+                        //intent.setData(Uri.parse("tel:" + number));
+                        startActivity(intent);
+                    })
+                    .setCancelText("Cancel")
+                    .show();
 
         });
 
         fire.setOnClickListener(view -> {
-            //Toast.makeText(requireContext(), "fire", Toast.LENGTH_SHORT).show();
             String number = "101";
-            Intent intent = new Intent(Intent.ACTION_CALL);
-            intent.setData(Uri.parse("tel:" + number));
-            startActivity(intent);
+            new SweetAlertDialog(requireContext(), SweetAlertDialog.WARNING_TYPE)
+                    .setTitleText("Alert!")
+                    .setContentText("Do you want to continue this call")
+                    .setConfirmButton("Call", sweetAlertDialog -> {
+                        Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + number));
+                        //intent.setData(Uri.parse("tel:" + number));
+                        startActivity(intent);
+                    })
+                    .setCancelText("Cancel")
+                    .show();
 
         });
 
         women.setOnClickListener(view -> {
-            // Toast.makeText(requireContext(), "women", Toast.LENGTH_SHORT).show();
             String number = "1090";
-            Intent intent = new Intent(Intent.ACTION_CALL);
-            intent.setData(Uri.parse("tel:" + number));
-            startActivity(intent);
 
+            new SweetAlertDialog(requireContext(), SweetAlertDialog.WARNING_TYPE)
+                    .setTitleText("Alert!")
+                    .setContentText("Do you want to continue this call")
+                    .setConfirmButton("Call", sweetAlertDialog -> {
+                        Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + number));
+                        //intent.setData(Uri.parse("tel:" + number));
+                        startActivity(intent);
+                    })
+                    .setCancelText("Cancel")
+                    .show();
         });
 
         covid.setOnClickListener(view -> {
             String number = "1075";
-            Intent intent = new Intent(Intent.ACTION_CALL);
-            intent.setData(Uri.parse("tel:" + number));
-            startActivity(intent);
+            new SweetAlertDialog(requireContext(), SweetAlertDialog.WARNING_TYPE)
+                    .setTitleText("Alert!")
+                    .setContentText("Do you want to continue this call")
+                    .setConfirmButton("Call", sweetAlertDialog -> {
+                        Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + number));
+                        //intent.setData(Uri.parse("tel:" + number));
+                        startActivity(intent);
+                    })
+                    .setCancelText("Cancel")
+                    .show();
         });
 
         other.setOnClickListener(view -> {
@@ -122,7 +158,6 @@ public class Other_Help extends Fragment {
             startActivity(intent);
 
         });
-
         return v;
     }
 }

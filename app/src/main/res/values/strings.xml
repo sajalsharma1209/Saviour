@@ -46,7 +46,7 @@
     <string name="ok">OK</string>
     <string name="add_contact_from_your_contact_list">Add contact from your contact list</string>
     <string name="police_emergency">Police</string>
-    <string name="medical_emergency">Medical</string>
+    <string name="medical_emergency">Ambulance</string>
     <string name="fire_safety">Fire</string>
     <string name="women_safety">Women Helpline</string>
     <string name="other_helpline_no">Other Helpline No</string>

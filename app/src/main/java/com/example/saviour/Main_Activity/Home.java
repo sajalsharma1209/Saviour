@@ -1,15 +1,19 @@
 package com.example.saviour.Main_Activity;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.IntentSender;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.location.Location;
 import android.location.LocationManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Looper;
+import android.provider.Settings;
 import android.telephony.SmsManager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,6 +26,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 
 import com.example.saviour.Conn;
+import com.example.saviour.Main_Activity.Menu_Add_Members.Add_Number;
 import com.example.saviour.R;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.common.api.ResolvableApiException;
@@ -42,6 +47,8 @@ import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import cn.pedant.SweetAlert.SweetAlertDialog;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -68,6 +75,7 @@ public class Home extends Fragment {
     public Home() {
         // Required empty public constructor
     }
+
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
@@ -132,10 +140,22 @@ public class Home extends Fragment {
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(requireContext());
 
         Dexter.withContext(getContext())
-                .withPermissions(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.SEND_SMS, Manifest.permission.READ_PHONE_STATE,Manifest.permission.READ_CONTACTS,Manifest.permission.CALL_PHONE)
+                .withPermissions(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.SEND_SMS, Manifest.permission.READ_PHONE_STATE, Manifest.permission.READ_CONTACTS, Manifest.permission.CALL_PHONE)
                 .withListener(new MultiplePermissionsListener() {
                     @Override
                     public void onPermissionsChecked(MultiplePermissionsReport multiplePermissionsReport) {
+
+                        if (multiplePermissionsReport.isAnyPermissionPermanentlyDenied()) {
+                            new SweetAlertDialog(
+                                    requireContext(), 1)
+                                    .setTitleText("Oops...")
+                                    .setContentText("Please check the all permissions ")
+                                    .setConfirmButton("Click here to allow the permissions", sweetAlertDialog -> {
+                                        sweetAlertDialog.hide();
+                                        startActivityForResult(new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package:" + requireActivity().getPackageName())), 0);
+                                    }).show();
+
+                        }
 
                     }
 
@@ -148,7 +168,6 @@ public class Home extends Fragment {
         if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
             displayLocationSettingsRequest(v.getContext());
         }
-
 
 
         clicksasbutton = v.findViewById(R.id.sosclickbutton);
@@ -165,14 +184,51 @@ public class Home extends Fragment {
                 }
 
             } else {
-                ActivityCompat.requestPermissions(requireActivity(), new String[]{Manifest.permission.SEND_SMS, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.READ_PHONE_STATE}, 0);
+
+                Dexter.withContext(getContext())
+                        .withPermissions(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.SEND_SMS, Manifest.permission.READ_PHONE_STATE, Manifest.permission.READ_CONTACTS, Manifest.permission.CALL_PHONE)
+                        .withListener(new MultiplePermissionsListener() {
+                            @Override
+                            public void onPermissionsChecked(MultiplePermissionsReport multiplePermissionsReport) {
+
+                                if (multiplePermissionsReport.isAnyPermissionPermanentlyDenied()) {
+                                    new SweetAlertDialog(
+                                            requireContext(), 1)
+                                            .setTitleText("Oops...")
+                                            .setContentText("Please check the all permissions ")
+                                            .setConfirmButton("Click here to allow the permissions", sweetAlertDialog -> {
+                                                sweetAlertDialog.hide();
+                                                startActivityForResult(new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package:" + requireActivity().getPackageName())), 0);
+                                            }).show();
+
+
+                                }
+
+                            }
+
+                            @Override
+                            public void onPermissionRationaleShouldBeShown(List<PermissionRequest> list, PermissionToken permissionToken) {
+                                permissionToken.continuePermissionRequest();
+                            }
+                        }).check();
+
             }
         });
 
         return v;
     }
 
+
+    @SuppressLint("MissingPermission")
     private void startLocationUpdates() {
+
+        // fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(getContext());
+        mLocationRequest = LocationRequest.create()
+                .setPriority(100)
+                .setInterval(1)
+                .setFastestInterval(0);
+
+
         if (ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
             //    ActivityCompat#requestPermissions
@@ -183,16 +239,10 @@ public class Home extends Fragment {
             // for ActivityCompat#requestPermissions for more details.
             return;
         }
-        // fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(getContext());
-        mLocationRequest = LocationRequest.create()
-                .setPriority(100)
-                .setInterval(1)
-                .setFastestInterval(0);
-
-
         fusedLocationProviderClient.requestLocationUpdates(mLocationRequest,
                 locationCallback,
                 Looper.getMainLooper());
+
     }
 
     private void stopLocationUpdates() {
@@ -200,6 +250,7 @@ public class Home extends Fragment {
         fusedLocationProviderClient.removeLocationUpdates(locationCallback);
     }
 
+    @SuppressLint("MissingPermission")
     public void send_sms() {
 
 
@@ -208,7 +259,10 @@ public class Home extends Fragment {
         Conn conn = new Conn(getContext());
         Cursor cursor = conn.get_members();
 
-        if (ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.READ_PHONE_STATE) == PackageManager.PERMISSION_GRANTED) {
+
+        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(requireContext());
+
+        if (ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
             //    ActivityCompat#requestPermissions
             // here to request the missing permissions, and then overriding
@@ -218,8 +272,6 @@ public class Home extends Fragment {
             // for ActivityCompat#requestPermissions for more details.
             return;
         }
-
-        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(requireContext());
         fusedLocationProviderClient.getLastLocation().addOnSuccessListener(location -> {
             if (location != null) {
                 lat = location.getLatitude();
@@ -239,10 +291,24 @@ public class Home extends Fragment {
                     "\n\nPlease reach ASAP to the given location below\n\n" +
                     string3;
             ArrayList<String> arrayList = smsManager.divideMessage(string2);
-            while (cursor.moveToNext()) {
-                smsManager.sendMultipartTextMessage(cursor.getString(2), null, arrayList, null, null);
-                Toast.makeText(Home.this.getContext(), "SOS Message sent to " + cursor.getString(1), Toast.LENGTH_SHORT).show();
+
+            if (cursor != null && cursor.getCount() > 0) {
+                while (cursor.moveToNext()) {
+                    smsManager.sendMultipartTextMessage(cursor.getString(2), null, arrayList, null, null);
+                    Toast.makeText(Home.this.getContext(), "SOS Message sent to " + cursor.getString(1), Toast.LENGTH_SHORT).show();
+                }
+            } else {
+
+                new SweetAlertDialog(
+                        requireContext(), SweetAlertDialog.WARNING_TYPE)
+                        .setTitleText("Oops...")
+                        .setContentText("You haven't added members")
+                        .setConfirmButton("CLick here to add members", sweetAlertDialog -> {
+                            startActivity(new Intent(requireContext(), Add_Number.class));
+                            sweetAlertDialog.hide();
+                        }).show();
             }
+
         });
 
     }

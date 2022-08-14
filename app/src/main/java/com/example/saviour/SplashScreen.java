@@ -18,6 +18,7 @@ import java.util.Objects;
 
 @SuppressLint("CustomSplashScreen")
 public class SplashScreen extends AppCompatActivity {
+
     ImageView imageView;
     TextView title,bottomtitle;
     Animation top,middle,bottom;
@@ -42,7 +43,6 @@ public class SplashScreen extends AppCompatActivity {
         bottomtitle.setAnimation(bottom);
 
         new Handler().postDelayed(() -> {
-
             startActivity(new Intent(SplashScreen.this, MainActivity.class));
             finish();
         },3000);

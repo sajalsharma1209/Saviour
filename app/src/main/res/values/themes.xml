@@ -3,7 +3,7 @@
     <style name="Theme.Saviour" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
 <!--    <style name="Theme.Dark.Saviour" parent="Theme.MaterialComponents.DayNight.NoActionBar">-->
         <!-- Primary brand color. -->
-        <item name="colorPrimary">#008DFF</item>
+        <item name="colorPrimary">#F70E88EA</item>
         <item name="colorPrimaryVariant">@color/blue</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
