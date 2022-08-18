@@ -7,16 +7,7 @@
         <deviceKey>
           <Key>
             <type value="SERIAL_NUMBER" />
-            <value value="LRORTGQ87PZHIFNN" />
-          </Key>
-        </deviceKey>
-      </Target>
-      <Target>
-        <type value="RUNNING_DEVICE_TARGET" />
-        <deviceKey>
-          <Key>
-            <type value="SERIAL_NUMBER" />
-            <value value="MRT8EAAISSNBSOTG" />
+            <value value="V8BQ5TDEHQG6INNF" />
           </Key>
         </deviceKey>
       </Target>

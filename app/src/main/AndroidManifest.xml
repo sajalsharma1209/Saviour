@@ -22,19 +22,16 @@
         <activity
             android:name=".Main_Activity.Other_help.Others_Helpline"
             android:exported="false" />
-
         <receiver
             android:name=".Sos_Widget_Provider"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
-
             <meta-data
                 android:name="android.appwidget.provider"
                 android:resource="@xml/sos_widget_info" />
         </receiver>
-
         <activity
             android:name=".Main_Activity.Menu_View_Members.Edit_Members"
             android:exported="false"
@@ -70,12 +67,9 @@
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <service android:name=".SmsService" />
     </application>
-
 </manifest>

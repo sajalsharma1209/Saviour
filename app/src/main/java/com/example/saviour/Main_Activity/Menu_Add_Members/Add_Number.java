@@ -86,7 +86,7 @@ public class Add_Number extends AppCompatActivity {
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public boolean onCreateOptionsMenu(@NonNull Menu menu) {
         getMenuInflater().inflate(R.menu.add_contact, menu);
         return super.onCreateOptionsMenu(menu);
     }
@@ -108,7 +108,7 @@ public class Add_Number extends AppCompatActivity {
     for pick the contact in contact list
 
      */
-    @SuppressLint("Range")
+    @SuppressLint({"Range", "Recycle"})
     @Override
     public void onActivityResult(int reqCode, int resultCode, Intent data) {
         super.onActivityResult(reqCode, resultCode, data);
@@ -116,7 +116,7 @@ public class Add_Number extends AppCompatActivity {
         if (resultCode == RESULT_OK) {
 
             if (reqCode == 1) {
-                Cursor cursor1, cursor2 = null;
+                Cursor cursor1, cursor2;
 
                 Uri uri = data.getData();
                 cursor1 = getContentResolver().query(uri, null, null, null, null);
@@ -164,7 +164,6 @@ public class Add_Number extends AppCompatActivity {
             return "" + s.substring(3);
         else
             return "" + s;
-
 
     }
 }

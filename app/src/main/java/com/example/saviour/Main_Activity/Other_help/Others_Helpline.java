@@ -36,17 +36,6 @@ public class Others_Helpline extends AppCompatActivity {
         adapter = new HelpLineAdapter(datalist);
 
         recyclerView.setAdapter(adapter);
-
-    }
-
-    private List getdata() {
-
-        List<HelpLineModel> list = new ArrayList<>();
-        list.add(new HelpLineModel("Senior Citizen Helpline",
-                "1091"));
-        list.add(new HelpLineModel("Railway Accident Emergency Service",
-                "1072"));
-        return list;
     }
 
     @Override
@@ -56,5 +45,18 @@ public class Others_Helpline extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @NonNull
+    private List getdata() {
+
+        List<HelpLineModel> list = new ArrayList<>();
+        list.add(new HelpLineModel("Senior Citizen Helpline",
+                "1091"));
+        list.add(new HelpLineModel("Railway Accident Emergency Service",
+                "1072"));
+        list.add(new HelpLineModel("Children Helpline number",
+                "1098"));
+        return list;
     }
 }

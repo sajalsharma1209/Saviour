@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.saviour.R;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class HelpLineAdapter extends RecyclerView.Adapter<HelpLineAdapter.viewholder> {
@@ -46,7 +45,6 @@ public class HelpLineAdapter extends RecyclerView.Adapter<HelpLineAdapter.viewho
 
 
         });
-
     }
 
     @Override
@@ -54,7 +52,7 @@ public class HelpLineAdapter extends RecyclerView.Adapter<HelpLineAdapter.viewho
         return datalist.size();
     }
 
-    public class viewholder extends RecyclerView.ViewHolder {
+    public static class viewholder extends RecyclerView.ViewHolder {
 
         TextView name, mobile;
 

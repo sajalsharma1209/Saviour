@@ -166,7 +166,7 @@ public class Home extends Fragment {
                 }).check();
 
         if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
-            displayLocationSettingsRequest(v.getContext());
+            displayLocationSettingsRequest();
         }
 
 
@@ -179,7 +179,7 @@ public class Home extends Fragment {
                     send_sms();
                     //Toast.makeText(getContext(), "Submit", Toast.LENGTH_SHORT).show();
                 } else {
-                    displayLocationSettingsRequest(getContext());
+                    displayLocationSettingsRequest();
                     //Toast.makeText(getContext(), "Android", Toast.LENGTH_SHORT).show();
                 }
 
@@ -310,7 +310,6 @@ public class Home extends Fragment {
             }
 
         });
-
     }
 
     private String getMessage() {
@@ -322,7 +321,7 @@ public class Home extends Fragment {
         return message;
     }
 
-    private void displayLocationSettingsRequest(Context context) {
+    private void displayLocationSettingsRequest() {
 
 
         LocationSettingsRequest.Builder settingsBuilder = new LocationSettingsRequest.Builder()
