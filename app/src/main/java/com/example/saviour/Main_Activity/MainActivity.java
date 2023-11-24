@@ -1,5 +1,6 @@
 package com.example.saviour.Main_Activity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -18,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
     Menu menu = new Menu();
     Other_Help help = new Other_Help();
 
+    @SuppressLint("NonConstantResourceId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

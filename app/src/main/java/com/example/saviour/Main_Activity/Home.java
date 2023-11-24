@@ -154,7 +154,6 @@ public class Home extends Fragment {
                                         sweetAlertDialog.hide();
                                         startActivityForResult(new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package:" + requireActivity().getPackageName())), 0);
                                     }).show();
-
                         }
 
                     }
